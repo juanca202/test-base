@@ -1,5 +1,5 @@
 ---
-id: ADR-007
+id: ADR-006
 status: Draft
 last_update: 2026-09-22
 deciders: [Equipo de QA]
@@ -9,7 +9,7 @@ superseded_by: null
 emits: [testing/CR-004, testing/CR-005, testing/CR-006]
 ---
 
-# ADR-007: Estrategia de datos de prueba
+# ADR-006: Estrategia de datos de prueba
 
 ## Contexto
 

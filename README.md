@@ -1,13 +1,12 @@
 # Proyecto Base de QA
 
-Este es un framework de pruebas automatizadas diseñado para realizar testing de aplicaciones web y APIs REST sin acceso al código fuente. Proporciona una base sólida para implementar pruebas E2E y API testing con integración completa a Azure DevOps Test Cases.
+Este es un framework de pruebas automatizadas diseñado para realizar testing de aplicaciones web y APIs REST sin acceso al código fuente. Proporciona una base sólida para implementar pruebas E2E y API testing.
 
 El framework está construido con Playwright + TypeScript y sigue las mejores prácticas de la industria para testing de aplicaciones externas, incluyendo patrones de Page Object Model, configuración multi-ambiente y reportería avanzada con Allure.
 
 ## Características principales
 
 - 🎭 **Playwright + TypeScript**: Framework moderno para testing E2E y API
-- 🔄 **Azure DevOps Integration**: Sincronización automática con Test Cases
 - 📊 **Allure Reports**: Reportería avanzada con categorización de fallos
 - 🌐 **Multi-browser**: Soporte para Chromium, Firefox, Safari y móviles
 - 🔧 **Configuración flexible**: Variables por ambiente y configuración modular
@@ -60,26 +59,6 @@ El framework está construido con Playwright + TypeScript y sigue las mejores pr
    ```bash
    npm run allure:serve       # Servidor local de Allure
    npm run test:report        # Reporte HTML de Playwright
-   ```
-
-## Configuración de Azure DevOps
-
-Para habilitar la integración con Azure DevOps Test Cases:
-
-1. Configurar variables en `.env`:
-
-   ```
-   AZURE_DEVOPS_ORG=tu-organizacion
-   AZURE_DEVOPS_PROJECT=tu-proyecto
-   AZURE_DEVOPS_PAT=tu-token-personal
-   ```
-
-2. Usar el decorador `@azureTestCase` en tus pruebas:
-   ```typescript
-   @azureTestCase('12345')
-   test('mi test case', async ({ page }) => {
-     // Tu prueba aquí
-   });
    ```
 
 ## Scripts disponibles

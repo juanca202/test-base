@@ -1,5 +1,5 @@
 ---
-id: ADR-004
+id: ADR-003
 status: Draft
 last_update: 2026-09-22
 deciders: [Equipo de QA]
@@ -9,7 +9,7 @@ superseded_by: null
 emits: [testing/CR-002]
 ---
 
-# ADR-004: Mock Service Worker para mocks de APIs HTTP
+# ADR-003: Mock Service Worker para mocks de APIs HTTP
 
 ## Contexto
 

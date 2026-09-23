@@ -3,13 +3,13 @@ name: Testing Standards
 domain: testing
 status: Active
 last_update: 2026-09-22
-source_adrs: [ADR-004, ADR-006, ADR-007, ADR-008]
+source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007]
 tags: [testing, msw]
 ---
 
 # Testing Standards
 
-Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, Azure DevOps, tiempos, mocks HTTP, APIs REST y GraphQL, y evidencias de ejecución.
+Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, tiempos, mocks HTTP, APIs REST y GraphQL, y evidencias de ejecución.
 
 ## Estructura de pruebas
 
@@ -67,17 +67,6 @@ Ninguna.
 **Estado:** Active
 
 Un elemento inestable **DEBE** reintentarse como máximo 3 veces. Las llamadas API **DEBEN** usar backoff exponencial. Los servicios externos **DEBEN** protegerse con un circuit breaker.
-
-### Excepciones
-
-Ninguna.
-
-## Azure DevOps
-
-**ID:** azure-devops-cases
-**Estado:** Active
-
-Una prueba que corresponde a un test case manual **DEBE** mapearse con `@azureTestCase` y el identificador del caso. **DEBE** documentar el enlace al caso manual, las precondiciones del ambiente y las dependencias de datos, incluido el cleanup.
 
 ### Excepciones
 
@@ -173,8 +162,7 @@ Ninguna.
 ## Referencias
 
 - [ADR-002: Page Object Model como Patrón de Diseño](../adr/ADR-002-page-object-model-pattern.md)
-- [ADR-003: Integración Directa con Azure DevOps Test Cases](../adr/ADR-003-azure-devops-integration.md)
-- [ADR-004: Mock Service Worker para mocks de APIs HTTP](../adr/ADR-004-msw-http-mocks.md)
-- [ADR-006: APIRequestContext de Playwright para pruebas REST y GraphQL](../adr/ADR-006-playwright-api-request-context.md)
-- [ADR-007: Estrategia de datos de prueba](../adr/ADR-007-test-data-strategy.md)
-- [ADR-008: Evidencias y artefactos de ejecución](../adr/ADR-008-execution-evidence.md)
+- [ADR-003: Mock Service Worker para mocks de APIs HTTP](../adr/ADR-003-msw-http-mocks.md)
+- [ADR-005: APIRequestContext de Playwright para pruebas REST y GraphQL](../adr/ADR-005-playwright-api-request-context.md)
+- [ADR-006: Estrategia de datos de prueba](../adr/ADR-006-test-data-strategy.md)
+- [ADR-007: Evidencias y artefactos de ejecución](../adr/ADR-007-execution-evidence.md)

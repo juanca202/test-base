@@ -11,7 +11,6 @@ Incluir estos archivos en cada conversación para obtener contexto completo sobr
 
 - Este es un proyecto de QA para testing de aplicaciones externas sin acceso al código fuente
 - Utilizar Playwright + TypeScript para pruebas E2E y API testing
-- Integración con Azure DevOps Test Cases requerida
 - Seguir patrones de Page Object Model para estructurar las pruebas
 - Mantener reportes claros usando Allure para documentación de resultados
 - Configurar pruebas para múltiples browsers y viewports
@@ -33,7 +32,6 @@ Incluir estos archivos en cada conversación para obtener contexto completo sobr
 
 ## Integración y CI/CD
 
-- **Azure DevOps APIs** - Integración con Test Cases
 - **Husky 9.1.7** - Git hooks para pre-commit
 - **dotenv 18.0.3** - Gestión de variables de ambiente
 

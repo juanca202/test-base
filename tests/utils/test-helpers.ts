@@ -137,35 +137,3 @@ export class ApiHelpers {
     }
   }
 }
-
-/**
- * Azure DevOps integration utilities
- */
-export class AzureDevOpsHelpers {
-  /**
-   * Update test case result in Azure DevOps
-   */
-  static async updateTestCaseResult(
-    testCaseId: string,
-    outcome: 'Passed' | 'Failed' | 'Blocked' | 'Not Executed',
-    comment?: string
-  ): Promise<void> {
-    // Implementation for Azure DevOps API integration
-    // This would require azure-devops-node-api package
-    console.log(
-      `Test Case ${testCaseId}: ${outcome}${comment ? ` - ${comment}` : ''}`
-    );
-  }
-
-  /**
-   * Get test case data from Azure DevOps
-   */
-  static async getTestCaseData(testCaseId: string): Promise<any> {
-    // Implementation to fetch test case details from Azure DevOps
-    return {
-      id: testCaseId,
-      title: `Test Case ${testCaseId}`,
-      steps: [],
-    };
-  }
-}

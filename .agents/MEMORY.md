@@ -6,7 +6,6 @@ Memoria de preferencias del proyecto. Las decisiones arquitectónicas se registr
 
 - **Enfoque de testing**: Black-box testing para aplicaciones externas
 - **Herramientas principales**: Playwright + TypeScript + Allure
-- **Integración requerida**: Azure DevOps Test Cases
 - **Patrones de diseño**: Page Object Model (POM)
 - **Reportería**: Allure Reports con categorización de fallos
 
@@ -25,13 +24,6 @@ Memoria de preferencias del proyecto. Las decisiones arquitectónicas se registr
 - Variables de ambiente para URLs, credenciales y configuraciones
 - Configuración flexible de browsers y viewports
 - Timeouts configurables por tipo de prueba
-
-### Integración con Azure DevOps
-
-- Mapear test cases con IDs de Azure DevOps
-- Actualizar resultados automáticamente
-- Generar reportes compatibles con Azure DevOps
-- Mantener trazabilidad entre pruebas automatizadas y test cases manuales
 
 ### Buenas prácticas establecidas
 

@@ -26,7 +26,6 @@ Este directorio contiene los estándares y convenciones técnicas que deben segu
 ### Integración
 
 - Formato de reportes
-- Integración con Azure DevOps
 - Configuración de ambientes
 - Deployment de pruebas
 

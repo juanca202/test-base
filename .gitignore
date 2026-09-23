@@ -50,8 +50,5 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Azure DevOps
-.azure/
-
 # SDD DevKit
 .sdd-devkit/.env

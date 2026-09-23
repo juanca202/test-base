@@ -1,5 +1,5 @@
 ---
-id: ADR-008
+id: ADR-007
 status: Draft
 last_update: 2026-09-22
 deciders: [Equipo de QA]
@@ -9,7 +9,7 @@ superseded_by: null
 emits: [testing/CR-007, testing/CR-008]
 ---
 
-# ADR-008: Evidencias y artefactos de ejecución
+# ADR-007: Evidencias y artefactos de ejecución
 
 ## Contexto
 

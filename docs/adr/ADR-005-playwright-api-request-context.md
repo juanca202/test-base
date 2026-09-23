@@ -1,5 +1,5 @@
 ---
-id: ADR-006
+id: ADR-005
 status: Accepted
 last_update: 2026-09-22
 deciders: [Equipo de QA]
@@ -9,7 +9,7 @@ superseded_by: null
 emits: [testing/CR-003]
 ---
 
-# ADR-006: APIRequestContext de Playwright para pruebas REST y GraphQL
+# ADR-005: APIRequestContext de Playwright para pruebas REST y GraphQL
 
 ## Contexto
 

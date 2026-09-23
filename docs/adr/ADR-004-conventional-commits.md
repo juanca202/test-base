@@ -1,5 +1,5 @@
 ---
-id: ADR-005
+id: ADR-004
 status: Draft
 last_update: 2026-09-22
 deciders: [Equipo de QA]
@@ -9,7 +9,7 @@ superseded_by: null
 emits: []
 ---
 
-# ADR-005: Conventional Commits con commitlint y Husky
+# ADR-004: Conventional Commits con commitlint y Husky
 
 ## Contexto
 

@@ -37,7 +37,6 @@
     "push": "never"
   },
   "projectManagement": {
-    "enabled": false,
-    "provider": "azure-devops"
+    "enabled": false
   }
 }

@@ -6,12 +6,11 @@ Este directorio contiene las decisiones de arquitectura importantes del proyecto
 
 - [ADR-001: Playwright como Framework Principal de Testing](ADR-001-playwright-as-testing-framework.md)
 - [ADR-002: Page Object Model como Patrón de Diseño](ADR-002-page-object-model-pattern.md)
-- [ADR-003: Integración Directa con Azure DevOps Test Cases](ADR-003-azure-devops-integration.md)
-- [ADR-004: Mock Service Worker para mocks de APIs HTTP](ADR-004-msw-http-mocks.md)
-- [ADR-005: Conventional Commits con commitlint y Husky](ADR-005-conventional-commits.md)
-- [ADR-006: APIRequestContext de Playwright para pruebas REST y GraphQL](ADR-006-playwright-api-request-context.md)
-- [ADR-007: Estrategia de datos de prueba](ADR-007-test-data-strategy.md)
-- [ADR-008: Evidencias y artefactos de ejecución](ADR-008-execution-evidence.md)
+- [ADR-003: Mock Service Worker para mocks de APIs HTTP](ADR-003-msw-http-mocks.md)
+- [ADR-004: Conventional Commits con commitlint y Husky](ADR-004-conventional-commits.md)
+- [ADR-005: APIRequestContext de Playwright para pruebas REST y GraphQL](ADR-005-playwright-api-request-context.md)
+- [ADR-006: Estrategia de datos de prueba](ADR-006-test-data-strategy.md)
+- [ADR-007: Evidencias y artefactos de ejecución](ADR-007-execution-evidence.md)
 
 ## Formato de ADR
 
