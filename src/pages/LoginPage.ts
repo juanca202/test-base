@@ -1,0 +1,42 @@
+import { BasePage } from './BasePage';
+
+const HEADING = 'role=heading[name="Iniciar sesión"]';
+const USERNAME_INPUT = 'role=textbox[name="Usuario"]';
+const PASSWORD_INPUT = 'role=textbox[name="Contraseña"]';
+const SUBMIT_BUTTON = 'role=button[name="Iniciar sesión"]';
+
+/**
+ * Page Object of the portal login screen (`/signin`).
+ */
+export class LoginPage extends BasePage {
+  /** Selector of the login screen heading. */
+  static readonly HEADING_SELECTOR = HEADING;
+
+  /** Open the portal root; without a session it redirects to the login. */
+  async goto(): Promise<void> {
+    await this.page.goto('/');
+    await this.waitForPageLoad();
+  }
+
+  /** Type the username in the login form. */
+  async fillUsername(username: string): Promise<void> {
+    await this.fill(USERNAME_INPUT, username);
+  }
+
+  /** Type the password in the login form. */
+  async fillPassword(password: string): Promise<void> {
+    await this.fill(PASSWORD_INPUT, password);
+  }
+
+  /** Submit the login form. */
+  async clickSubmit(): Promise<void> {
+    await this.click(SUBMIT_BUTTON);
+  }
+
+  /** Fill both fields and submit the form. */
+  async login(username: string, password: string): Promise<void> {
+    await this.fillUsername(username);
+    await this.fillPassword(password);
+    await this.clickSubmit();
+  }
+}
