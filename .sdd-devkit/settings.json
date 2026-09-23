@@ -1,11 +1,12 @@
 {
   "language": "es",
   "specification": {
-    "basePath": "docs/specs",
-    "archivePath": "docs/specs/archive",
+    "changesPath": "docs/specs/changes/",
+    "currentPath": "docs/specs/current/",
+    "archivedPath": "docs/specs/archived/",
     "testCases": {
-      "mode": "ask",
-      "askDetails": true
+      "createMode": "ask",
+      "createDetailsMode": "ask"
     }
   },
   "implementation": {
@@ -15,7 +16,7 @@
     "maxParallel": 3,
     "archiveMode": "ask",
     "handoff": "ask",
-    "target": "external"
+    "scope": "tests"
   },
   "verification": {
     "qualityCheck": {
