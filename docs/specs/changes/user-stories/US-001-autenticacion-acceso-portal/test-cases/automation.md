@@ -5,7 +5,7 @@
 **Estado:** In Progress
 **Sistema bajo prueba:** Portal de procesos BAW (frontend) sobre IBM BAW — variables: `BASE_URL`, `API_BASE_URL`, `TEST_USER_NAME`, `TEST_USER_PASSWORD`
 **Fecha de creación:** 2026-09-23 14:10
-**Ultima actualizacion:** 2026-09-23 15:25
+**Ultima actualizacion:** 2026-09-23 16:00
 
 ## Unidades
 
@@ -86,11 +86,51 @@ Ninguno.
 
 ### TC-004: Petición autenticada por HTTPS con token CSRF
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 15:45
+**Finalizado:** 2026-09-23 16:00
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ src/helpers/baw-session.ts
++ tests/api/us-001/tc-004-peticion-autenticada-https-csrf.api.spec.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-004 (Unit, Integration) se automatizó como API Test, según lo decidido con el usuario (desviación de nivel: Unit/Integration → API).
+- Cubierto: BAW acepta con `200` una petición posterior al login con la cookie de sesión y `BPMCSRFToken`, y no devuelve `403` con `CWTBG0651E` (paso 5).
+- No verificado: el esquema `https` (paso 4). `API_BASE_URL` apunta al proxy de desarrollo del portal (`http`), y el TC indica que el `https` aplica a la URL configurada de BAW, que este repositorio no conoce. Tampoco se observa el interceptor del portal (pasos 2-3) desde API: la presencia de `BPMCSRFToken` y de la cookie en las peticiones del portal se comprueba en el E2E de TC-001.
+- Para cubrir el `https` haría falta una variable con la URL directa de BAW (p. ej. `BAW_BASE_URL`) que hoy no existe en `.env`.
+
+**Hallazgos:**
+
+Ninguno.
 
 ### TC-005: Petición sin token CSRF rechazada
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 15:45
+**Finalizado:** 2026-09-23 16:00
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/api/us-001/tc-005-peticion-sin-csrf-token-rechazada.api.spec.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-005 (Integration) se automatizó como API Test, según lo decidido con el usuario (desviación de nivel: Integration → API).
+- Cubierto: con la cookie de sesión vigente y sin `BPMCSRFToken`, BAW responde `403` (no `401`) con `error_number: CWTBG0651E` y sin datos de tareas (pasos 1-3).
+- No cubierto en esta prueba: la clasificación de la respuesta como sesión inválida por parte del portal (paso 4); es comportamiento del portal y lo cubre TC-008. La precondición «desactivar el interceptor» se sustituye por emitir la petición directamente por API sin la cabecera.
+
+**Hallazgos:**
+
+Ninguno.
 
 ### TC-006: Cierre de sesión desde el menú lateral
 
