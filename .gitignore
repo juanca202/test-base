@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.d.ts
+*.d.ts.map
+*.js.map
+
+# Test results and artifacts
+test-results/
+allure-results/
+allure-report/
+playwright-report/
+
+# Screenshots and videos
+screenshots/
+videos/
+traces/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Authentication
+tests/setup/auth.json
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Azure DevOps
+.azure/
+
+# SDD DevKit
+.sdd-devkit/.env
