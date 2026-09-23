@@ -2,6 +2,15 @@ import { BasePage } from './BasePage';
 
 const USER_MENU_BUTTON = 'role=banner >> role=button';
 const LOGOUT_MENU_ITEM = 'role=menuitem[name="Cerrar sesión"]';
+const HAMBURGER_BUTTON =
+  'role=banner >> role=button[name=/menú|menu|hamburgues|navegación/i]';
+
+/** Main navigation destinations of the authenticated portal. */
+export const NAVIGATION_DESTINATIONS = [
+  'Mis tareas',
+  'Procesos',
+  'Rendimiento',
+];
 
 /**
  * Page Object of the authenticated portal shell (header with module tabs and user menu).
@@ -30,5 +39,44 @@ export class PortalLayoutPage extends BasePage {
   /** End the session from the user menu. */
   async clickLogout(): Promise<void> {
     await this.click(LOGOUT_MENU_ITEM);
+  }
+
+  /** Whether the navigation tab of a destination is visible. */
+  async isDestinationVisible(name: string): Promise<boolean> {
+    return await this.page.getByRole('tab', { name }).isVisible();
+  }
+
+  /** Whether the text label of a destination is visible (not collapsed to an icon). */
+  async isDestinationLabelVisible(name: string): Promise<boolean> {
+    return await this.page
+      .getByRole('tab', { name })
+      .getByText(name, { exact: true })
+      .isVisible();
+  }
+
+  /** Whether a hamburger control to expand the navigation is shown. */
+  async hasHamburgerControl(): Promise<boolean> {
+    return await this.page.locator(HAMBURGER_BUTTON).isVisible();
+  }
+
+  /** Whether the page scrolls horizontally, i.e. content overflows the viewport. */
+  async hasHorizontalOverflow(): Promise<boolean> {
+    return (
+      (await this.page.evaluate(
+        'document.documentElement.scrollWidth > document.documentElement.clientWidth'
+      )) === true
+    );
+  }
+
+  /** Interact with the collapsed navigation so that it expands (hover the tab bar). */
+  async expandNavigation(): Promise<void> {
+    await this.page
+      .getByRole('tablist', { name: 'Navegación principal' })
+      .hover();
+  }
+
+  /** Open the overlay navigation panel with the hamburger control. */
+  async openNavigationPanel(): Promise<void> {
+    await this.click(HAMBURGER_BUTTON);
   }
 }

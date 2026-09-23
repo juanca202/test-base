@@ -2,10 +2,10 @@
 
 ## US-001: Autenticación y acceso al portal
 
-**Estado:** In Progress
+**Estado:** Done
 **Sistema bajo prueba:** Portal de procesos BAW (frontend) sobre IBM BAW — variables: `BASE_URL`, `API_BASE_URL`, `TEST_USER_NAME`, `TEST_USER_PASSWORD`
 **Fecha de creación:** 2026-09-23 14:10
-**Ultima actualizacion:** 2026-09-23 16:50
+**Ultima actualizacion:** 2026-09-23 17:40
 
 ## Unidades
 
@@ -235,16 +235,95 @@ Ninguno.
 
 ### TC-011: Layout de escritorio con navegación completa
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 17:00
+**Finalizado:** 2026-09-23 17:40
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-011-layout-escritorio.e2e.spec.ts
+~ src/pages/PortalLayoutPage.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-011 (Visual Test) se automatizó como E2E con aserciones estructurales, en 1280 y 1920px y en `/tasks` y `/processes`: navegación completa con etiquetas, sin control de hamburguesa y sin desborde horizontal.
+- Comparación con la «referencia visual aprobada» (paso de captura): no se automatiza; no hay referencia aprobada en el repositorio y Mis tareas muestra datos vivos de BAW, lo que haría inestable un diff de píxeles. Se sustituye por aserciones estructurales y se adjuntan capturas de cada ancho al reporte para revisión manual.
+- Los módulos de prueba `/mis-tareas` del TC son `[propuesto]`; se usaron las rutas reales `/tasks` y `/processes`.
+
+**Hallazgos:**
+
+Ninguno.
 
 ### TC-012: Layout de tablet con navegación colapsada
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 17:00
+**Finalizado:** 2026-09-23 17:40
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-012-layout-tablet.e2e.spec.ts
+~ src/pages/PortalLayoutPage.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-012 (Visual Test) se automatizó como E2E. Cubierto y en verde: en 768, 1024 y 1279px todos los destinos están presentes y accesibles, sin desborde horizontal.
+- Pasos 2-4 y 6 (navegación colapsada a iconos, expansión al interactuar y recolapso tras navegar): prueba marcada `test.fixme` por hallazgo. La interacción de expansión (`hover` sobre la barra) es una suposición del automatizador, pues el TC no la concreta y el portal no tiene navegación colapsable.
+- Comparación con la «referencia visual aprobada» (paso de captura): no se automatiza; no hay referencia aprobada en el repositorio y Mis tareas muestra datos vivos de BAW, lo que haría inestable un diff de píxeles. Se sustituye por aserciones estructurales y se adjuntan capturas de cada ancho al reporte para revisión manual.
+
+**Hallazgos:**
+
+- TC-012 (pasos 2-4, 6) — esperado: navegación colapsada a iconos entre 768 y 1279px, que se expande al interactuar y vuelve a colapsar tras navegar · observado: la navegación muestra sus etiquetas de texto en todo el rango de tablet, igual que en escritorio · prueba marcada: skip (`test.fixme`) · seguimiento: sin registrar
 
 ### TC-013: Layout móvil con menú hamburguesa
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 17:00
+**Finalizado:** 2026-09-23 17:40
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-013-layout-movil.e2e.spec.ts
+~ src/pages/PortalLayoutPage.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-013 (Visual Test) se automatizó como E2E. Cubierto y en verde: en 360 y 767px no hay desborde horizontal y la navegación no ocupa espacio fijo en pantalla.
+- Pasos 2-5 y 7 (icono de hamburguesa, panel superpuesto con destinos, cierre sin perder estado): prueba marcada `test.fixme` por hallazgo. Además, con la navegación oculta no hay forma visible de cambiar de módulo en móvil.
+- Comparación con la «referencia visual aprobada» (paso de captura): no se automatiza; no hay referencia aprobada en el repositorio y Mis tareas muestra datos vivos de BAW, lo que haría inestable un diff de píxeles. Se sustituye por aserciones estructurales y se adjuntan capturas de cada ancho al reporte para revisión manual.
+
+**Hallazgos:**
+
+- TC-013 (pasos 2-5, 7) — esperado: por debajo de 768px, icono de hamburguesa que abre un panel superpuesto con todos los destinos · observado: no hay icono de hamburguesa y la barra de navegación está oculta, sin alternativa visible para cambiar de módulo · prueba marcada: skip (`test.fixme`) · seguimiento: sin registrar
 
 ### TC-014: Breakpoints 768 y 1280 (límite)
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 17:00
+**Finalizado:** 2026-09-23 17:40
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-014-breakpoints-768-1280.e2e.spec.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-014 (Visual Test) se automatizó como E2E. Cubierto y en verde: en 767, 768, 769, 1279, 1280 y 1281px no hay desborde horizontal; la navegación aparece exactamente desde 768px (767px no la muestra); y al redimensionar de forma continua entre 360 y 1920px nunca coexisten la navegación y un icono de hamburguesa.
+- Pasos 1 y 4-6 (layout móvil con hamburguesa a 767px y cambio de tablet a escritorio en 1280px): prueba marcada `test.fixme` por hallazgo; el portal no diferencia 1279px de 1280px ni tiene hamburguesa a 767px.
+- Comparación con la «referencia visual aprobada» (paso de captura): no se automatiza; no hay referencia aprobada en el repositorio y Mis tareas muestra datos vivos de BAW, lo que haría inestable un diff de píxeles. Se sustituye por aserciones estructurales y se adjuntan capturas de cada ancho al reporte para revisión manual.
+
+**Hallazgos:**
+
+- TC-014 (pasos 1, 4-6) — esperado: 1279px con navegación colapsada a iconos y 1280px con etiquetas visibles; 767px con icono de hamburguesa · observado: 1279px y 1280px muestran la misma navegación con etiquetas y 767px no tiene hamburguesa · prueba marcada: skip (`test.fixme`) · seguimiento: sin registrar
