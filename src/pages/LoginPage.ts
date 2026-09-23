@@ -4,6 +4,7 @@ const HEADING = 'role=heading[name="Iniciar sesión"]';
 const USERNAME_INPUT = 'role=textbox[name="Usuario"]';
 const PASSWORD_INPUT = 'role=textbox[name="Contraseña"]';
 const SUBMIT_BUTTON = 'role=button[name="Iniciar sesión"]';
+const ERROR_ALERT = 'role=alert';
 
 /**
  * Page Object of the portal login screen (`/signin`).
@@ -38,5 +39,15 @@ export class LoginPage extends BasePage {
     await this.fillUsername(username);
     await this.fillPassword(password);
     await this.clickSubmit();
+  }
+
+  /** Text of the error alert shown after a failed login attempt. */
+  async getErrorMessage(): Promise<string> {
+    return (await this.getText(ERROR_ALERT)).trim();
+  }
+
+  /** Current value of the password field. */
+  async getPasswordValue(): Promise<string> {
+    return await this.page.locator(PASSWORD_INPUT).inputValue();
   }
 }

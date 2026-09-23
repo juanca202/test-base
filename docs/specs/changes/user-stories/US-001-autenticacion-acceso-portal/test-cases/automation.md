@@ -5,7 +5,7 @@
 **Estado:** In Progress
 **Sistema bajo prueba:** Portal de procesos BAW (frontend) sobre IBM BAW — variables: `BASE_URL`, `API_BASE_URL`, `TEST_USER_NAME`, `TEST_USER_PASSWORD`
 **Fecha de creación:** 2026-09-23 14:10
-**Ultima actualizacion:** 2026-09-23 14:50
+**Ultima actualizacion:** 2026-09-23 15:25
 
 ## Unidades
 
@@ -60,7 +60,29 @@ Ninguno.
 
 ### TC-003: Login con credenciales inválidas
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 15:00
+**Finalizado:** 2026-09-23 15:25
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-003-login-credenciales-invalidas.e2e.spec.ts
++ tests/api/us-001/tc-003-login-credenciales-invalidas.api.spec.ts
+~ src/pages/LoginPage.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-003 (Integration, E2E) se automatizó como API + E2E, según lo decidido con el usuario; sin desviación de nivel.
+- Paso 4, campo de contraseña vacío: prueba marcada `test.fixme` por hallazgo abierto (ver Hallazgos). El resto del TC (401, mensaje genérico e idéntico para usuario inexistente, permanencia en el login, sin sesión) está cubierto y en verde.
+- Datos de prueba `[propuesto]`: usuario existente = `TEST_USER_NAME` del `.env` con contraseña incorrecta; usuario inexistente y contraseña incorrecta son constantes de la prueba.
+- Cada corrida completa provoca 2 intentos fallidos contra la cuenta real (1 E2E + 1 API); si BAW aplica bloqueo por intentos, conviene tenerlo presente.
+
+**Hallazgos:**
+
+- TC-003 (paso 4) — esperado: campo de contraseña vacío tras el error · observado: el campo conserva la contraseña tecleada · prueba marcada: skip (`test.fixme`) · seguimiento: sin registrar
 
 ### TC-004: Petición autenticada por HTTPS con token CSRF
 
