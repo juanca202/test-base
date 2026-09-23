@@ -41,6 +41,19 @@ export class LoginPage extends BasePage {
     await this.clickSubmit();
   }
 
+  /**
+   * Log in and wait until the portal lands on its initial module.
+   * @param username - Account name.
+   * @param password - Account password.
+   */
+  async loginAndWaitForPortal(
+    username: string,
+    password: string
+  ): Promise<void> {
+    await this.login(username, password);
+    await this.page.waitForURL(/\/tasks/, { timeout: 30000 });
+  }
+
   /** Text of the error alert shown after a failed login attempt. */
   async getErrorMessage(): Promise<string> {
     return (await this.getText(ERROR_ALERT)).trim();

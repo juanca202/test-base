@@ -5,7 +5,7 @@
 **Estado:** In Progress
 **Sistema bajo prueba:** Portal de procesos BAW (frontend) sobre IBM BAW — variables: `BASE_URL`, `API_BASE_URL`, `TEST_USER_NAME`, `TEST_USER_PASSWORD`
 **Fecha de creación:** 2026-09-23 14:10
-**Ultima actualizacion:** 2026-09-23 16:00
+**Ultima actualizacion:** 2026-09-23 16:50
 
 ## Unidades
 
@@ -134,19 +134,104 @@ Ninguno.
 
 ### TC-006: Cierre de sesión desde el menú lateral
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 16:10
+**Finalizado:** 2026-09-23 16:50
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ src/helpers/portal-session.ts
++ src/pages/PortalLayoutPage.ts
++ tests/e2e/us-001/tc-006-cierre-sesion.e2e.spec.ts
+~ src/pages/LoginPage.ts
+```
+
+**Cobertura de test cases:**
+
+- Pasos 1-2 (botón en el pie del menú lateral, expandido y colapsado): no automatizables tal como están escritos; el portal no tiene menú lateral (ver Hallazgos). Prueba marcada `test.fixme`.
+- Paso 1 adaptado: se comprueba que «Cerrar sesión» está disponible en el menú de usuario del encabezado desde otro módulo (Procesos). AC-003 no fija la ubicación del control.
+- Pasos 3-7 cubiertos y en verde: sin peticiones a BAW al cerrar sesión, redirección a `/signin` y retroceso del navegador sin mostrar el módulo.
+- Paso 5: el portal no expone `csrf_token` ni `username`; se verifica que la cookie de sesión del portal (`baw_sess`) desaparece. La clave `baw_sess` de `localStorage` permanece tras el cierre; no se asierta por ser un valor opaco.
+- La precondición del TC sobre TK-001 sin implementar ya no aplica: los pasos 5-7 pasan.
+
+**Hallazgos:**
+
+- TC-006 (pasos 1-2) — esperado: botón de cierre de sesión en el pie del menú lateral, visible expandido y colapsado · observado: el portal no tiene menú lateral; el cierre de sesión está en el menú de usuario del encabezado · prueba marcada: skip (`test.fixme`) · seguimiento: test-define (actualizar el TC al diseño vigente)
 
 ### TC-007: Sesión expira durante un formulario
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 16:10
+**Finalizado:** 2026-09-23 16:50
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-007-sesion-expira-durante-formulario.e2e.spec.ts
+~ src/pages/TasksPage.ts
+~ src/pages/PortalLayoutPage.ts
+```
+
+**Cobertura de test cases:**
+
+- Formulario de prueba (paso 1-2): hoy no hay un formulario editable de tarea alcanzable desde fuera («Ejecutar» no muestra uno); se usó el campo «Buscar» de Mis tareas como entrada sin guardar. Desviación de datos de prueba respecto al TC.
+- Expiración forzada (paso 3) eliminando las cookies de BAW y conservando la sesión del portal; BAW responde `401`, admitido por el TC.
+- Verificado: aviso «Tu sesión ha expirado», redirección al login, credenciales del portal descartadas y texto sin guardar ausente tras reautenticarse.
+- No verificado: que el texto tampoco exista en BAW; al ser una entrada local nunca se envía.
+
+**Hallazgos:**
+
+Ninguno.
 
 ### TC-008: Acceso directo por URL con sesión inválida
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 16:10
+**Finalizado:** 2026-09-23 16:50
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-008-acceso-directo-url-sesion-invalida.e2e.spec.ts
+~ src/helpers/portal-session.ts
+```
+
+**Cobertura de test cases:**
+
+- Paso 1: no se puede sembrar un `csrf_token` inválido concreto (el portal guarda una sesión opaca); la sesión se invalida quitando las cookies de BAW, alternativa que recoge la precondición del TC («la cookie de sesión caducó»).
+- BAW responde `401` a la primera petición autenticada (el TC admite `401` o `403`); se verifica que todas sus respuestas son `401`/`403`.
+- Verificado: redirección a `/signin`, credenciales del portal descartadas y ninguna celda de datos renderizada en ningún momento (observador de DOM), además de no aparecer el módulo.
+
+**Hallazgos:**
+
+Ninguno.
 
 ### TC-009: BAW inaccesible en el login
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 16:10
+**Finalizado:** 2026-09-23 16:50
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ tests/e2e/us-001/tc-009-baw-inaccesible-en-login.e2e.spec.ts
+```
+
+**Cobertura de test cases:**
+
+- TC-009 (Integration, E2E): solo la parte E2E. La parte Integration/API no es automatizable: una prueba API no puede dejar BAW inaccesible de forma controlada, y suplantar la respuesta no ejercita a BAW.
+- Las tres variantes se ejecutan con `page.route` sobre `POST /bpm/system/login` (error de red, tiempo de espera agotado, `500`). El tiempo de espera se simula abortando la petición como agotada, no esperando el timeout real del portal.
+- Verificado por variante: mensaje de indisponibilidad distinto del de credenciales y sin detalles técnicos, login operativo con botón habilitado, sin sesión, módulo protegido devuelve al login y, restablecido BAW, el mismo usuario entra.
+
+**Hallazgos:**
+
+Ninguno.
 
 ### TC-011: Layout de escritorio con navegación completa
 
