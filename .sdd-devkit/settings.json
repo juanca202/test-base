@@ -1,0 +1,43 @@
+{
+  "language": "es",
+  "specification": {
+    "basePath": "docs/specs",
+    "archivePath": "docs/specs/archive",
+    "testCases": {
+      "mode": "ask",
+      "askDetails": true
+    }
+  },
+  "implementation": {
+    "confirmByUnit": "always",
+    "uncommittedChanges": "ask",
+    "workTree": "ask",
+    "maxParallel": 3,
+    "archiveMode": "ask",
+    "handoff": "ask",
+    "target": "external"
+  },
+  "verification": {
+    "qualityCheck": {
+      "enabled": true,
+      "confirmFix": "always"
+    },
+    "codeReview": {
+      "enabled": true,
+      "confirmFix": "always"
+    },
+    "requirementCoverage": {
+      "enabled": true,
+      "confirmFix": "always"
+    },
+    "handoff": "ask"
+  },
+  "git": {
+    "commitConfirmation": "always",
+    "push": "never"
+  },
+  "projectManagement": {
+    "enabled": false,
+    "provider": "azure-devops"
+  }
+}
