@@ -24,7 +24,7 @@
     "clean": "rm -rf dist allure-results allure-report test-results",
     "install:browsers": "playwright install",
     "install:deps": "playwright install-deps",
-    "prepare": "husky install",
+    "prepare": "husky",
     "quality:check": "npm run lint && npm run format:check && npm run build",
     "arch": "node scripts/arch/verify.mjs"
   },
