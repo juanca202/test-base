@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="800" fill="#ffffff"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="220" height="800" fill="#4d4d4d"/>
+  <text x="20" y="40" font-size="14" fill="#ffffff">Usuario autenticado</text>
+  <text x="20" y="110" font-size="14" fill="#cccccc">Iniciar</text>
+  <rect x="0" y="135" width="220" height="34" fill="#666666"/>
+  <text x="20" y="157" font-size="14" fill="#ffffff">Mis tareas</text>
+  <text x="20" y="200" font-size="14" fill="#cccccc">Procesos</text>
+  <text x="20" y="240" font-size="14" fill="#cccccc">Rendimiento del proceso</text>
+  <text x="20" y="280" font-size="14" fill="#cccccc">Rendimiento del equipo</text>
+
+  <!-- Top bar -->
+  <rect x="220" y="0" width="1060" height="70" fill="#e6e6e6"/>
+  <text x="250" y="42" font-size="20" fill="#333333">Mis tareas</text>
+
+  <!-- Summary counters all zero -->
+  <rect x="800" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="845" y="30" font-size="10" fill="#666666" text-anchor="middle">Total</text>
+  <text x="845" y="48" font-size="16" fill="#333333" text-anchor="middle">0</text>
+
+  <rect x="900" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="945" y="30" font-size="10" fill="#666666" text-anchor="middle">A tiempo</text>
+  <text x="945" y="48" font-size="16" fill="#999999" text-anchor="middle">0</text>
+
+  <rect x="1000" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="1045" y="30" font-size="10" fill="#666666" text-anchor="middle">En riesgo</text>
+  <text x="1045" y="48" font-size="16" fill="#999999" text-anchor="middle">0</text>
+
+  <rect x="1100" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="1145" y="30" font-size="10" fill="#666666" text-anchor="middle">Vencidas</text>
+  <text x="1145" y="48" font-size="16" fill="#999999" text-anchor="middle">0</text>
+
+  <!-- Search / filters (disabled-ish, no results) -->
+  <rect x="250" y="90" width="450" height="36" rx="4" fill="#f5f5f5" stroke="#bbbbbb"/>
+  <text x="262" y="113" font-size="12" fill="#999999">Campo: buscar por texto (en página actual)...</text>
+  <rect x="710" y="90" width="130" height="36" rx="4" fill="#e6e6e6" stroke="#bbbbbb"/>
+  <text x="775" y="113" font-size="11" fill="#666666" text-anchor="middle">Selector: Estado</text>
+  <rect x="850" y="90" width="130" height="36" rx="4" fill="#e6e6e6" stroke="#bbbbbb"/>
+  <text x="915" y="113" font-size="11" fill="#666666" text-anchor="middle">Selector: Modelo</text>
+  <rect x="990" y="90" width="130" height="36" rx="4" fill="#e6e6e6" stroke="#bbbbbb"/>
+  <text x="1055" y="113" font-size="11" fill="#666666" text-anchor="middle">Selector: Instancia</text>
+
+  <!-- Empty state (TC-004) -->
+  <g>
+    <circle cx="740" cy="420" r="46" fill="#f0f0f0"/>
+    <text x="740" y="435" font-size="40" fill="#bbbbbb" text-anchor="middle">🗒</text>
+    <text x="740" y="500" font-size="16" fill="#333333" text-anchor="middle">No tienes tareas asignadas</text>
+    <text x="740" y="524" font-size="12" fill="#666666" text-anchor="middle">Cuando el equipo te asigne una tarea, aparecerá aquí</text>
+  </g>
+
+  <text x="250" y="775" font-size="10" fill="#999999">Estado vacío: se muestra cuando la respuesta de GET /bpm/user-tasks no trae elementos (TC-004)</text>
+</svg>

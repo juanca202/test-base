@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="800" fill="#ffffff"/>
+
+  <!-- Sidebar (misma estructura que listado-base.svg) -->
+  <rect x="0" y="0" width="220" height="800" fill="#4d4d4d"/>
+  <text x="20" y="40" font-size="14" fill="#ffffff">Usuario autenticado</text>
+  <text x="20" y="110" font-size="14" fill="#cccccc">Iniciar</text>
+  <rect x="0" y="135" width="220" height="34" fill="#666666"/>
+  <text x="20" y="157" font-size="14" fill="#ffffff">Mis tareas</text>
+  <text x="20" y="200" font-size="14" fill="#cccccc">Procesos</text>
+  <text x="20" y="240" font-size="14" fill="#cccccc">Rendimiento del proceso</text>
+  <text x="20" y="280" font-size="14" fill="#cccccc">Rendimiento del equipo</text>
+
+  <!-- Top bar -->
+  <rect x="220" y="0" width="1060" height="70" fill="#e6e6e6"/>
+  <text x="250" y="42" font-size="20" fill="#333333">Mis tareas</text>
+
+  <!-- Listado de fondo, atenuado (la pantalla queda debajo del modal) -->
+  <rect x="220" y="70" width="1060" height="730" fill="#f2f2f2"/>
+  <g opacity="0.35">
+    <rect x="250" y="150" width="980" height="60" fill="#ffffff" stroke="#dddddd"/>
+    <rect x="262" y="163" width="10" height="34" fill="#5c8a5c"/>
+    <text x="284" y="172" font-size="13" fill="#333333">Aprobar Crédito</text>
+    <text x="284" y="190" font-size="11" fill="#666666">Solicitar Crédito:273 · Analistas</text>
+    <rect x="250" y="210" width="980" height="60" fill="#ffffff" stroke="#dddddd"/>
+    <rect x="262" y="223" width="10" height="34" fill="#d9a441"/>
+    <text x="284" y="232" font-size="13" fill="#333333">Solicitar apertura de cuenta</text>
+    <rect x="250" y="270" width="980" height="60" fill="#ffffff" stroke="#dddddd"/>
+    <rect x="262" y="283" width="10" height="34" fill="#b3261e"/>
+    <text x="284" y="292" font-size="13" fill="#333333">Revisar solicitud de vacaciones</text>
+  </g>
+
+  <!-- Scrim -->
+  <rect x="220" y="70" width="1060" height="730" fill="#000000" opacity="0.35"/>
+
+  <!-- Modal "Ver flujo" -->
+  <rect x="330" y="140" width="820" height="560" rx="8" fill="#ffffff" stroke="#bbbbbb"/>
+
+  <!-- Header del modal -->
+  <rect x="330" y="140" width="820" height="56" rx="8" fill="#f5f5f5"/>
+  <text x="356" y="174" font-size="16" fill="#333333">Ver flujo: Aprobar Crédito</text>
+  <text x="356" y="192" font-size="11" fill="#666666">Solicitar Crédito:273 · Analistas</text>
+  <circle cx="1108" cy="168" r="14" fill="#e6e6e6"/>
+  <text x="1108" y="173" font-size="14" fill="#666666" text-anchor="middle">×</text>
+
+  <!-- Nota de origen del diagrama (mock) -->
+  <text x="356" y="216" font-size="10" fill="#999999">Diagrama generado con Mermaid a partir de datos mock — no consulta la API de BAW (TK-005)</text>
+
+  <!-- Contenedor del diagrama Mermaid -->
+  <rect x="356" y="228" width="768" height="400" rx="4" fill="#fafafa" stroke="#e0e0e0"/>
+
+  <!-- Representación esquemática del flowchart Mermaid: inicio -> pasos -> fin, paso activo resaltado -->
+  <g font-size="11" text-anchor="middle">
+    <ellipse cx="440" cy="300" rx="46" ry="24" fill="#e6e6e6" stroke="#999999"/>
+    <text x="440" y="304" fill="#333333">Inicio</text>
+
+    <path d="M486 300 H560" stroke="#999999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="560" y="276" width="140" height="48" rx="4" fill="#e6e6e6" stroke="#999999"/>
+    <text x="630" y="304" fill="#333333">Revisar solicitud</text>
+
+    <path d="M700 300 H774" stroke="#999999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Paso activo (tarea actual), resaltado igual que el badge de SLA "en riesgo" -->
+    <rect x="774" y="270" width="150" height="60" rx="4" fill="#fdf3e3" stroke="#d9a441" stroke-width="2"/>
+    <text x="849" y="298" fill="#8a6d1f" font-weight="bold">Aprobar Crédito</text>
+    <text x="849" y="314" fill="#8a6d1f" font-size="9">(paso actual · en riesgo)</text>
+
+    <path d="M849 330 V 400" stroke="#999999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="774" y="400" width="150" height="48" rx="4" fill="#e6e6e6" stroke="#999999"/>
+    <text x="849" y="428" fill="#333333">Notificar cliente</text>
+
+    <path d="M849 448 V 500" stroke="#999999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <ellipse cx="849" cy="530" rx="46" ry="24" fill="#e6e6e6" stroke="#999999"/>
+    <text x="849" y="534" fill="#333333">Fin</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#999999"/>
+    </marker>
+  </defs>
+
+  <!-- Footer del modal -->
+  <rect x="330" y="644" width="820" height="56" fill="#f5f5f5"/>
+  <rect x="1030" y="660" width="100" height="28" rx="3" fill="#e0e0e0" stroke="#bbbbbb"/>
+  <text x="1080" y="679" font-size="11" fill="#666666" text-anchor="middle">Cerrar</text>
+
+  <text x="330" y="730" font-size="10" fill="#999999">El cierre del modal (botón "Cerrar", ✕ o Escape) devuelve el foco al botón "Ver flujo" que lo abrió.</text>
+  <text x="330" y="746" font-size="10" fill="#999999">Estado propuesto (TK-005): pendiente de confirmar contra el diagrama real de BAW (ver US-005, API-12).</text>
+</svg>

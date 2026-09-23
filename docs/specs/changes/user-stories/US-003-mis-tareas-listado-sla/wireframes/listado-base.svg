@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="800" fill="#ffffff"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="220" height="800" fill="#4d4d4d"/>
+  <text x="20" y="40" font-size="14" fill="#ffffff">Usuario autenticado</text>
+  <text x="20" y="110" font-size="14" fill="#cccccc">Iniciar</text>
+  <rect x="0" y="135" width="220" height="34" fill="#666666"/>
+  <text x="20" y="157" font-size="14" fill="#ffffff">Mis tareas</text>
+  <text x="20" y="200" font-size="14" fill="#cccccc">Procesos</text>
+  <text x="20" y="240" font-size="14" fill="#cccccc">Rendimiento del proceso</text>
+  <text x="20" y="280" font-size="14" fill="#cccccc">Rendimiento del equipo</text>
+
+  <!-- Top bar -->
+  <rect x="220" y="0" width="1060" height="70" fill="#e6e6e6"/>
+  <text x="250" y="42" font-size="20" fill="#333333">Mis tareas</text>
+
+  <!-- Summary counters: Total, A tiempo, En riesgo, Vencidas (AC-002) -->
+  <rect x="800" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="845" y="30" font-size="10" fill="#666666" text-anchor="middle">Total</text>
+  <text x="845" y="48" font-size="16" fill="#333333" text-anchor="middle">20</text>
+
+  <rect x="900" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="945" y="30" font-size="10" fill="#666666" text-anchor="middle">A tiempo</text>
+  <text x="945" y="48" font-size="16" fill="#5c8a5c" text-anchor="middle">13</text>
+
+  <rect x="1000" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="1045" y="30" font-size="10" fill="#666666" text-anchor="middle">En riesgo</text>
+  <text x="1045" y="48" font-size="16" fill="#d9a441" text-anchor="middle">4</text>
+
+  <rect x="1100" y="15" width="90" height="40" rx="4" fill="#e0e0e0"/>
+  <text x="1145" y="30" font-size="10" fill="#666666" text-anchor="middle">Vencidas</text>
+  <text x="1145" y="48" font-size="16" fill="#b3261e" text-anchor="middle">3</text>
+
+  <text x="800" y="63" font-size="9" fill="#999999">Nota: resumen calculado sobre la página cargada (AC-002)</text>
+
+  <!-- Search / filters -->
+  <rect x="250" y="90" width="450" height="36" rx="4" fill="#f5f5f5" stroke="#bbbbbb"/>
+  <text x="262" y="113" font-size="12" fill="#999999">Campo: buscar por texto (en página actual)...</text>
+  <rect x="710" y="90" width="130" height="36" rx="4" fill="#e6e6e6" stroke="#bbbbbb"/>
+  <text x="775" y="113" font-size="11" fill="#666666" text-anchor="middle">Selector: Estado</text>
+  <rect x="850" y="90" width="130" height="36" rx="4" fill="#e6e6e6" stroke="#bbbbbb"/>
+  <text x="915" y="113" font-size="11" fill="#666666" text-anchor="middle">Selector: Modelo</text>
+  <rect x="990" y="90" width="130" height="36" rx="4" fill="#e6e6e6" stroke="#bbbbbb"/>
+  <text x="1055" y="113" font-size="11" fill="#666666" text-anchor="middle">Selector: Instancia</text>
+
+  <!-- Column headers -->
+  <text x="284" y="142" font-size="10" fill="#999999">TAREA / PROCESO</text>
+  <text x="790" y="142" font-size="10" fill="#999999">VENCIMIENTO</text>
+  <text x="1081" y="142" font-size="10" fill="#999999" text-anchor="middle">ACCIONES</text>
+
+  <!-- Task rows: uno por cada estado de SLA (AC-001), con acciones: editar, historial, ver flujo, ver instancia, ejecutar -->
+  <g>
+    <rect x="250" y="150" width="980" height="60" fill="#ffffff" stroke="#dddddd"/>
+    <rect x="262" y="163" width="10" height="34" fill="#5c8a5c"/>
+    <text x="284" y="172" font-size="13" fill="#333333">Aprobar Crédito</text>
+    <text x="284" y="190" font-size="11" fill="#666666">Solicitar Crédito:273 · Analistas</text>
+    <text x="790" y="172" font-size="11" fill="#666666">Vence: 8 sept 2026</text>
+    <text x="790" y="188" font-size="11" fill="#666666">16:45 · A tiempo</text>
+    <rect x="940" y="168" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="967" y="184" font-size="6.5" fill="#333333" text-anchor="middle">Editar</text>
+    <rect x="997" y="168" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1024" y="184" font-size="6.5" fill="#333333" text-anchor="middle">Historial</text>
+    <rect x="1054" y="168" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1081" y="184" font-size="6.5" fill="#333333" text-anchor="middle">Ver flujo</text>
+    <rect x="1111" y="168" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1138" y="184" font-size="6.5" fill="#333333" text-anchor="middle">Ver instancia</text>
+    <rect x="1168" y="168" width="54" height="24" rx="3" fill="#999999"/>
+    <text x="1195" y="184" font-size="6.5" fill="#ffffff" text-anchor="middle">Ejecutar</text>
+  </g>
+  <g>
+    <rect x="250" y="210" width="980" height="60" fill="#f9f9f9" stroke="#dddddd"/>
+    <rect x="262" y="223" width="10" height="34" fill="#d9a441"/>
+    <text x="284" y="232" font-size="13" fill="#333333">Solicitar apertura de cuenta</text>
+    <text x="284" y="250" font-size="11" fill="#666666">Apertura de Cuentas:254 · Ejecutivos de cuenta</text>
+    <text x="790" y="232" font-size="11" fill="#666666">Vence: 12 sept 2026</text>
+    <text x="790" y="248" font-size="11" fill="#666666">09:00 · En riesgo</text>
+    <rect x="940" y="228" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="967" y="244" font-size="6.5" fill="#333333" text-anchor="middle">Editar</text>
+    <rect x="997" y="228" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1024" y="244" font-size="6.5" fill="#333333" text-anchor="middle">Historial</text>
+    <rect x="1054" y="228" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1081" y="244" font-size="6.5" fill="#333333" text-anchor="middle">Ver flujo</text>
+    <rect x="1111" y="228" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1138" y="244" font-size="6.5" fill="#333333" text-anchor="middle">Ver instancia</text>
+    <rect x="1168" y="228" width="54" height="24" rx="3" fill="#999999"/>
+    <text x="1195" y="244" font-size="6.5" fill="#ffffff" text-anchor="middle">Ejecutar</text>
+  </g>
+  <g>
+    <rect x="250" y="270" width="980" height="60" fill="#ffffff" stroke="#dddddd"/>
+    <rect x="262" y="283" width="10" height="34" fill="#b3261e"/>
+    <text x="284" y="292" font-size="13" fill="#333333">Revisar solicitud de vacaciones</text>
+    <text x="284" y="310" font-size="11" fill="#666666">Vacation request:110 · Recursos Humanos</text>
+    <text x="790" y="292" font-size="11" fill="#666666">Vence: 1 sept 2026</text>
+    <text x="790" y="308" font-size="11" fill="#666666">09:00 · Vencida</text>
+    <rect x="940" y="288" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="967" y="304" font-size="6.5" fill="#333333" text-anchor="middle">Editar</text>
+    <rect x="997" y="288" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1024" y="304" font-size="6.5" fill="#333333" text-anchor="middle">Historial</text>
+    <rect x="1054" y="288" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1081" y="304" font-size="6.5" fill="#333333" text-anchor="middle">Ver flujo</text>
+    <rect x="1111" y="288" width="54" height="24" rx="3" fill="#e6e6e6" stroke="#bbbbbb"/>
+    <text x="1138" y="304" font-size="6.5" fill="#333333" text-anchor="middle">Ver instancia</text>
+    <rect x="1168" y="288" width="54" height="24" rx="3" fill="#999999"/>
+    <text x="1195" y="304" font-size="6.5" fill="#ffffff" text-anchor="middle">Ejecutar</text>
+  </g>
+
+  <text x="250" y="365" font-size="11" fill="#999999">(... más filas de tareas ...)</text>
+
+  <!-- Pagination footer (AC-004: offset/size) -->
+  <rect x="250" y="700" width="980" height="50" fill="#f5f5f5" stroke="#dddddd"/>
+  <text x="266" y="730" font-size="11" fill="#666666">Mostrando 1–20 de 47</text>
+  <rect x="950" y="710" width="70" height="28" rx="3" fill="#e0e0e0" stroke="#bbbbbb"/>
+  <text x="985" y="729" font-size="11" fill="#666666" text-anchor="middle">Anterior</text>
+  <rect x="1030" y="710" width="70" height="28" rx="3" fill="#e0e0e0" stroke="#bbbbbb"/>
+  <text x="1065" y="729" font-size="11" fill="#666666" text-anchor="middle">Siguiente</text>
+
+  <text x="250" y="775" font-size="10" fill="#999999">Icono de estado SLA: barra de color a la izquierda de cada fila (verde=a tiempo, ámbar=en riesgo, rojo=vencida)</text>
+  <text x="250" y="790" font-size="10" fill="#999999">Acciones por tarea: Editar, Historial, Ver flujo, Ver instancia, Ejecutar (acción primaria, resaltada)</text>
+</svg>

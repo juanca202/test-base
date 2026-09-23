@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="800" fill="#ffffff"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="220" height="800" fill="#4d4d4d"/>
+  <text x="20" y="40" font-size="14" fill="#ffffff">Usuario autenticado</text>
+  <text x="20" y="110" font-size="14" fill="#cccccc">Iniciar</text>
+  <rect x="0" y="135" width="220" height="34" fill="#666666"/>
+  <text x="20" y="157" font-size="14" fill="#ffffff">Mis tareas</text>
+  <text x="20" y="200" font-size="14" fill="#cccccc">Procesos</text>
+  <text x="20" y="240" font-size="14" fill="#cccccc">Rendimiento del proceso</text>
+  <text x="20" y="280" font-size="14" fill="#cccccc">Rendimiento del equipo</text>
+
+  <!-- Top bar -->
+  <rect x="220" y="0" width="1060" height="70" fill="#e6e6e6"/>
+  <text x="250" y="42" font-size="20" fill="#333333">Mis tareas</text>
+
+  <!-- Loading indicator bar under top bar (AC-004 / TC-011: respuesta lenta) -->
+  <rect x="220" y="70" width="1060" height="3" fill="#dddddd"/>
+  <rect x="220" y="70" width="320" height="3" fill="#4d4d4d"/>
+
+  <!-- Summary counters skeleton -->
+  <rect x="800" y="15" width="90" height="40" rx="4" fill="#eeeeee"/>
+  <rect x="900" y="15" width="90" height="40" rx="4" fill="#eeeeee"/>
+  <rect x="1000" y="15" width="90" height="40" rx="4" fill="#eeeeee"/>
+  <rect x="1100" y="15" width="90" height="40" rx="4" fill="#eeeeee"/>
+  <text x="845" y="38" font-size="10" fill="#bbbbbb" text-anchor="middle">···</text>
+  <text x="945" y="38" font-size="10" fill="#bbbbbb" text-anchor="middle">···</text>
+  <text x="1045" y="38" font-size="10" fill="#bbbbbb" text-anchor="middle">···</text>
+  <text x="1145" y="38" font-size="10" fill="#bbbbbb" text-anchor="middle">···</text>
+
+  <!-- Search / filters disabled while loading -->
+  <rect x="250" y="90" width="450" height="36" rx="4" fill="#f5f5f5" stroke="#dddddd"/>
+  <text x="262" y="113" font-size="12" fill="#cccccc">Campo: buscar por texto...</text>
+  <rect x="710" y="90" width="130" height="36" rx="4" fill="#eeeeee" stroke="#dddddd"/>
+  <rect x="850" y="90" width="130" height="36" rx="4" fill="#eeeeee" stroke="#dddddd"/>
+  <rect x="990" y="90" width="130" height="36" rx="4" fill="#eeeeee" stroke="#dddddd"/>
+
+  <!-- Skeleton rows (área de acciones también en skeleton: editar, historial, ver flujo, ver instancia, ejecutar) -->
+  <g opacity="0.7">
+    <rect x="250" y="150" width="980" height="60" fill="#f5f5f5" stroke="#eeeeee"/>
+    <rect x="284" y="166" width="260" height="12" rx="3" fill="#e0e0e0"/>
+    <rect x="284" y="188" width="380" height="10" rx="3" fill="#eeeeee"/>
+    <rect x="790" y="182" width="140" height="10" rx="3" fill="#eeeeee"/>
+    <rect x="940" y="168" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="997" y="168" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1054" y="168" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1111" y="168" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1168" y="168" width="54" height="24" rx="3" fill="#e0e0e0"/>
+  </g>
+  <g opacity="0.7">
+    <rect x="250" y="210" width="980" height="60" fill="#f9f9f9" stroke="#eeeeee"/>
+    <rect x="284" y="226" width="260" height="12" rx="3" fill="#e0e0e0"/>
+    <rect x="284" y="248" width="380" height="10" rx="3" fill="#eeeeee"/>
+    <rect x="790" y="242" width="140" height="10" rx="3" fill="#eeeeee"/>
+    <rect x="940" y="228" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="997" y="228" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1054" y="228" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1111" y="228" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1168" y="228" width="54" height="24" rx="3" fill="#e0e0e0"/>
+  </g>
+  <g opacity="0.7">
+    <rect x="250" y="270" width="980" height="60" fill="#f5f5f5" stroke="#eeeeee"/>
+    <rect x="284" y="286" width="260" height="12" rx="3" fill="#e0e0e0"/>
+    <rect x="284" y="308" width="380" height="10" rx="3" fill="#eeeeee"/>
+    <rect x="790" y="302" width="140" height="10" rx="3" fill="#eeeeee"/>
+    <rect x="940" y="288" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="997" y="288" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1054" y="288" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1111" y="288" width="54" height="24" rx="3" fill="#eeeeee"/>
+    <rect x="1168" y="288" width="54" height="24" rx="3" fill="#e0e0e0"/>
+  </g>
+
+  <!-- Explicit loading label centered below skeleton -->
+  <text x="740" y="410" font-size="14" fill="#666666" text-anchor="middle">Cargando tareas...</text>
+
+  <text x="250" y="775" font-size="10" fill="#999999">Indicador de carga: visible mientras GET /bpm/user-tasks tarda en responder (TC-011); filtros y búsqueda deshabilitados</text>
+</svg>
