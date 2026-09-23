@@ -5,7 +5,7 @@
 **Estado:** In Progress
 **Sistema bajo prueba:** Portal de procesos BAW (frontend) sobre IBM BAW — variables: `BASE_URL`, `API_BASE_URL`, `TEST_USER_NAME`, `TEST_USER_PASSWORD`
 **Fecha de creación:** 2026-09-23 14:10
-**Ultima actualizacion:** 2026-09-23 14:10
+**Ultima actualizacion:** 2026-09-23 14:50
 
 ## Unidades
 
@@ -37,7 +37,26 @@ Ninguno.
 
 ### TC-002: Acceso sin sesión redirige al login
 
-**Estado:** Pending
+**Estado:** Done
+**Iniciado:** 2026-09-23 14:40
+**Finalizado:** 2026-09-23 14:50
+**Automatizador:** juanca202 / Claude
+
+**Pruebas:**
+
+```
++ src/pages/TasksPage.ts
++ tests/e2e/us-001/tc-002-acceso-sin-sesion-redirige-login.e2e.spec.ts
+```
+
+**Cobertura de test cases:**
+
+- Los datos de prueba `/mis-tareas` y `/login` del TC están marcados `[propuesto]`; se usaron las rutas reales del portal (`/tasks` y `/signin`).
+- Paso 1 (sin `csrf_token` ni `username` en almacenamiento): se verifica que el contexto de navegador nuevo no tiene cookies; el portal guarda una sesión opaca y no esas claves (ver TC-001).
+
+**Hallazgos:**
+
+Ninguno.
 
 ### TC-003: Login con credenciales inválidas
 
