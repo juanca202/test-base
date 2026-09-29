@@ -10,7 +10,7 @@
     }
   },
   "implementation": {
-    "confirmByUnit": "always",
+    "confirmByUnit": "never",
     "uncommittedChanges": "ask",
     "workTree": "ask",
     "maxParallel": 3,

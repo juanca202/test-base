@@ -32,6 +32,7 @@ Memoria de preferencias del proyecto. Las decisiones arquitectónicas se registr
 - Capturar screenshots y traces en fallos
 - Validar tanto UI como comportamiento funcional
 - Mantener tests independientes y paralelos
+- Redactar las descripciones de las pruebas (títulos de `test`/`describe`, pasos y aserciones) en español
 
 ## Decisiones técnicas previas
 
