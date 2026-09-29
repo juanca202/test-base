@@ -53,10 +53,6 @@ export default defineConfig({
     ['junit', { outputFile: 'test-results/junit.xml' }],
   ],
 
-  // Global setup and teardown
-  globalSetup: require.resolve('./tests/setup/global-setup.ts'),
-  globalTeardown: require.resolve('./tests/setup/global-teardown.ts'),
-
   // Shared settings for all tests
   use: {
     // Base URL to use in actions like `await page.goto('/')`
