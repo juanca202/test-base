@@ -69,6 +69,18 @@ export class PortalLayoutPage extends BasePage {
     return await this.page.locator(HAMBURGER_BUTTON).isVisible();
   }
 
+  /** Whether the label of a destination is cut off (an element holding its text overflows its box). */
+  async isDestinationLabelClipped(name: string): Promise<boolean> {
+    const tab = this.page.getByRole('tab', { name });
+    return (
+      (await tab.evaluate(`(tab) => [tab, ...tab.querySelectorAll('*')]
+        .filter(element => Array.from(element.childNodes).some(
+          node => node.nodeType === 3 && node.textContent.trim() !== ''))
+        .some(element => element.scrollWidth > element.clientWidth + 1)`)) ===
+      true
+    );
+  }
+
   /** Whether the page scrolls horizontally, i.e. content overflows the viewport. */
   async hasHorizontalOverflow(): Promise<boolean> {
     return (
