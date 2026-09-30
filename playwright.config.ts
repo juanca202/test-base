@@ -61,11 +61,11 @@ export default defineConfig({
     // Global test timeout
     actionTimeout: 10000,
 
-    // Collect trace when retrying the failed test
-    trace: 'on-first-retry',
+    // Keep the trace of every failure as primary diagnostic evidence (ADR-007)
+    trace: 'retain-on-failure',
 
-    // Record video on first retry
-    video: 'retain-on-failure',
+    // Record the video of every run, pass or fail (ADR-007)
+    video: 'on',
 
     // Take screenshot on failure
     screenshot: 'only-on-failure',
