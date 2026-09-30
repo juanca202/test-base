@@ -13,6 +13,9 @@ export class LoginPage extends BasePage {
   /** Selector of the login screen heading. */
   static readonly HEADING_SELECTOR = HEADING;
 
+  /** Selector of the login submit button. */
+  static readonly SUBMIT_SELECTOR = SUBMIT_BUTTON;
+
   /** Open the portal root; without a session it redirects to the login. */
   async goto(): Promise<void> {
     await this.page.goto('/');
