@@ -1,3 +1,4 @@
+import { Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 const USER_MENU_BUTTON = 'role=banner >> role=button';
@@ -88,5 +89,17 @@ export class PortalLayoutPage extends BasePage {
   /** Open the overlay navigation panel with the hamburger control. */
   async openNavigationPanel(): Promise<void> {
     await this.click(HAMBURGER_BUTTON);
+  }
+
+  /** Locator of the overlay navigation panel opened by the hamburger control. */
+  getNavigationPanel(): Locator {
+    return this.page.getByRole('dialog');
+  }
+
+  /** Whether a navigation destination is offered as a link inside the overlay panel. */
+  async isDestinationInPanel(name: string): Promise<boolean> {
+    return await this.getNavigationPanel()
+      .getByRole('link', { name })
+      .isVisible();
   }
 }
