@@ -1,13 +1,13 @@
 # TC-010 — Dado un usuario autenticado en condiciones normales de red, Cuando abre «Mis tareas», Entonces el listado queda cargado en no más de 3 segundos usando paginación de servidor
 
 **Perspectiva:** Happy Path
-**Tipo de prueba:** Integration, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Media
 **Criterio de aceptación:** AC-004 (Eficiencia de rendimiento) — Carga del listado en ≤ 3 s con paginación de servidor (`offset`/`size`)
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Integration, E2E · criterion=AC-004 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-004 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

@@ -8,7 +8,7 @@
 **Repositorios:** frontend
 **INVEST:** 🟢 6 / 6
 **DoR:** 🟢 6 / 6
-**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
+**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
 
 ## Descripción
 
@@ -23,9 +23,9 @@
 
 ## Referencias
 
-- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
-- **Diseño / prototipo:** [Wireframe de Rendimiento del proceso](../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/rendimiento-proceso.md)
-- **Documentación técnica:** [Indicador de rendimiento por proceso](../../../specs/technical-docs/portal-procesos-baw.md#md-08) · [Diagrama de proceso con estado](../../../specs/technical-docs/portal-procesos-baw.md#md-10) · [Obtener indicadores de rendimiento por proceso](../../../specs/technical-docs/portal-procesos-baw.md#api-10) · [Obtener el diagrama del proceso](../../../specs/technical-docs/portal-procesos-baw.md#api-12)
+- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
+- **Diseño / prototipo:** [Wireframe de Rendimiento del proceso](../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/rendimiento-proceso.md)
+- **Documentación técnica:** [Indicador de rendimiento por proceso](../../../../architecture/portal-procesos-baw/models/MD-08-indicador-rendimiento-proceso.md) · [Diagrama de proceso con estado](../../../../architecture/portal-procesos-baw/models/MD-10-diagrama-proceso-estado.md) · [Obtener indicadores de rendimiento por proceso](../../../../architecture/portal-procesos-baw/apis/API-018-rendimiento.md#no-existe-indicadores-proceso) · [Obtener el diagrama del proceso](../../../../architecture/portal-procesos-baw/apis/API-016-procesos.md#no-existe-diagrama-proceso)
 - **Investigación:** [RS-003: Diagrama de proceso vía la API visual de WLE](../../research/RS-003-diagrama-proceso-visual-wle/README.md) — fuente y formato de AC-002. [RS-004: Métricas de rendimiento por proceso](../../research/RS-004-metricas-rendimiento-proceso-wle/README.md) — vía preferida de AC-001. [RS-005: Rendimiento del equipo — panel nativo Team Performance (WLE)](../../research/RS-005-rendimiento-equipo-panel-nativo-wle/README.md) — panel hermano; no aportó al spike de AC-001. [RS-001 (US-005): spike apuntar el panel a un proceso propio](research/RS-001-spike-apuntar-panel-proceso-propio/README.md) — cierra el spike de AC-001 con datos reales.
 
 ## Observaciones

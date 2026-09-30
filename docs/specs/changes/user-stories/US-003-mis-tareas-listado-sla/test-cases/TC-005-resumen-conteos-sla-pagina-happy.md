@@ -1,13 +1,13 @@
 # TC-005 — Dado un usuario con tareas en los tres estados de SLA, Cuando abre «Mis tareas», Entonces el resumen muestra los conteos de a tiempo, en riesgo y vencida del total real de sus tareas
 
 **Perspectiva:** Happy Path
-**Tipo de prueba:** Unit, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Media
 **Criterio de aceptación:** AC-002 (Procesamiento de datos) — Resumen de conteos por estado de SLA calculado por el servidor sobre el total real de tareas del usuario
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Unit, E2E · criterion=AC-002 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-002 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

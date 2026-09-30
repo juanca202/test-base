@@ -1,13 +1,13 @@
 # TC-011 — Dada una respuesta de BAW cercana o superior a 3 segundos, Cuando el usuario abre «Mis tareas», Entonces el sistema muestra un indicador de carga en lugar de una pantalla en blanco
 
 **Perspectiva:** Límite
-**Tipo de prueba:** Integration
+**Tipo de prueba:** E2E
 **Prioridad:** Baja
 **Criterio de aceptación:** AC-004 (Eficiencia de rendimiento) — Carga del listado en ≤ 3 s con paginación de servidor (`offset`/`size`)
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Integration · criterion=AC-004 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-004 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

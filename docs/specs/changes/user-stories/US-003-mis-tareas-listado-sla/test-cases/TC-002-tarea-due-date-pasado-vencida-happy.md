@@ -1,13 +1,13 @@
 # TC-002 — Dada una tarea asignada cuyo `due_date` ya pasó, Cuando el sistema deriva su estado de SLA, Entonces la tarea se muestra como «vencida»
 
 **Perspectiva:** Happy Path
-**Tipo de prueba:** Unit, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Alta
 **Criterio de aceptación:** AC-001 (Interacción de usuario) — Listado de tareas asignadas con estado de SLA derivado en el cliente
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Unit, E2E · criterion=AC-001 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-001 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

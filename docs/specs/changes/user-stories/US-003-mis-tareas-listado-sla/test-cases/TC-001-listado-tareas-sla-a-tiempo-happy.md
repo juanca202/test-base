@@ -1,13 +1,13 @@
 # TC-001 — Dado un usuario autenticado con tareas asignadas cuyo vencimiento está lejano, Cuando abre «Mis tareas», Entonces el listado muestra cada tarea con sus datos y el estado de SLA «a tiempo»
 
 **Perspectiva:** Happy Path
-**Tipo de prueba:** Integration, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Alta
 **Criterio de aceptación:** AC-001 (Interacción de usuario) — Listado de tareas asignadas con estado de SLA derivado en el cliente
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Integration, E2E · criterion=AC-001 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-001 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

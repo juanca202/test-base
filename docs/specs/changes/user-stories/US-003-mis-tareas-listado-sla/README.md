@@ -8,7 +8,7 @@
 **Repositorios:** frontend
 **INVEST:** 🟢 6 / 6
 **DoR:** 🟢 6 / 6
-**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
+**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
 
 ## Descripción
 
@@ -33,9 +33,9 @@ La búsqueda por texto (AC-003) es un filtro del lado del cliente sobre la pági
 
 ## Referencias
 
-- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
-- **Diseño / prototipo:** [Wireframe de Mis tareas](../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/mis-tareas.md) · [Wireframes de estados de esta historia](./wireframes/README.md) (listado base + SLA, filtros, vacío, carga lenta) · [Propuesta interactiva de distribución responsiva](https://claude.ai/code/artifact/04f111c6-c5fc-4b0c-b52a-c8acabf6fea9)
-- **Documentación técnica:** [Tarea](../../../specs/technical-docs/portal-procesos-baw.md#md-04) · [Resumen de SLA de la lista de tareas](../../../specs/technical-docs/portal-procesos-baw.md#md-05) · [Buscar tareas del usuario (WLE)](../../../specs/technical-docs/portal-procesos-baw.md#api-13)
+- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
+- **Diseño / prototipo:** [Wireframe de Mis tareas](../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/mis-tareas.md) · [Wireframes de estados de esta historia](./wireframes/README.md) (listado base + SLA, filtros, vacío, carga lenta) · [Propuesta interactiva de distribución responsiva](https://claude.ai/code/artifact/04f111c6-c5fc-4b0c-b52a-c8acabf6fea9)
+- **Documentación técnica:** [Tarea](../../../../architecture/portal-procesos-baw/models/MD-04-tarea.md) · [Resumen de SLA de la lista de tareas](../../../../architecture/portal-procesos-baw/models/MD-05-resumen-sla-lista-tareas.md) · [Buscar tareas del usuario (WLE)](../../../../architecture/portal-procesos-baw/apis/API-017-tareas.md#put-rest-bpm-wle-tasks)
 - **Decisión arquitectónica:** ADR-015 — Integración con BAW vía la API REST nativa (WLE) en vez de contratos custom por historia (repo `frontend`)
 
 ## Observaciones

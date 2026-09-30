@@ -8,7 +8,7 @@
 **Repositorios:** frontend
 **INVEST:** 🟢 6 / 6
 **DoR:** 🟢 6 / 6
-**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
+**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
 
 ## Descripción
 
@@ -19,16 +19,20 @@
 ## Criterios de aceptación
 
 - **AC-001 (Interacción de usuario):** El sistema DEBE mostrar un listado de los procesos disponibles para que el usuario inicie una nueva instancia, obtenido mediante `GET /rest/bpm/wle/v1/exposed/process` (familia WLE de la API de BAW).
+  Casos de prueba: [TC-001](./test-cases/TC-001-listado-procesos-iniciables-happy.md) · [TC-002](./test-cases/TC-002-listado-sin-sesion-401-error.md)
 - **AC-002 (Casos de uso):** Al seleccionar un proceso del listado, el sistema DEBE iniciar una nueva instancia mediante `POST /rest/bpm/wle/v1/process?action=start`, usando el `bpdId` y el `processAppId` del proceso elegido (valores que ya trae cada elemento del listado de AC-001, en su campo `startURL`).
+  Casos de prueba: [TC-003](./test-cases/TC-003-inicio-instancia-real-api-happy.md) · [TC-004](./test-cases/TC-004-seleccion-proceso-envia-start-con-ids-happy.md) · [TC-005](./test-cases/TC-005-inicio-bpdid-inexistente-error.md)
 - **AC-003 (Fiabilidad):** El sistema NO DEBE reintentar automáticamente el inicio de una instancia tras un error de red o timeout, dado que la operación no es idempotente; DEBE informar el error al usuario y permitir que decida reintentar manualmente.
+  Casos de prueba: [TC-006](./test-cases/TC-006-timeout-inicio-sin-reintento-automatico-error.md) · [TC-007](./test-cases/TC-007-error-red-reintento-manual-error.md)
 - **AC-004 (Interacción de usuario):** Si el listado de procesos iniciables está vacío o su carga falla, el sistema DEBE mostrar un estado vacío o de error explícito — distinto entre sí — en vez de dejar la vista en blanco o indefinida.
+  Casos de prueba: [TC-008](./test-cases/TC-008-listado-vacio-estado-vacio-limite.md) · [TC-009](./test-cases/TC-009-fallo-carga-listado-estado-error.md)
 
 ## Referencias
 
-- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
-- **Diseño / prototipo:** [Wireframe de Iniciar](../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/iniciar.md)
+- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
+- **Diseño / prototipo:** [Wireframe de Iniciar](../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/iniciar.md)
 - **Investigación:** [RS-002 — Procesos iniciables vía WLE](../../research/RS-002-procesos-iniciables-wle/README.md)
-- **Documentación técnica:** [Proceso iniciable](../../../specs/technical-docs/portal-procesos-baw.md#md-02) · [Listar procesos iniciables](../../../specs/technical-docs/portal-procesos-baw.md#api-03) · [Iniciar una instancia de proceso (WLE)](../../../specs/technical-docs/portal-procesos-baw.md#api-14) · [Iniciar una instancia de proceso (flujo)](../../../specs/technical-docs/portal-procesos-baw.md#fl-04)
+- **Documentación técnica:** [Proceso iniciable](../../../../architecture/portal-procesos-baw/models/MD-02-proceso-iniciable.md) · [Listar procesos iniciables](../../../../architecture/portal-procesos-baw/apis/API-016-procesos.md#get-rest-bpm-wle-exposed-process) · [Iniciar una instancia de proceso (WLE)](../../../../architecture/portal-procesos-baw/apis/API-016-procesos.md#post-rest-bpm-wle-process) · [Iniciar una instancia de proceso (flujo)](../../../../architecture/portal-procesos-baw/flows/FL-04-iniciar-instancia-proceso.md)
 
 ## Observaciones
 

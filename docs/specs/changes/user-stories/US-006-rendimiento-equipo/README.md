@@ -8,7 +8,7 @@
 **Repositorios:** frontend
 **INVEST:** 🟢 5 · 🟡 1 / 6
 **DoR:** 🟢 6 / 6
-**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
+**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
 
 ## Descripción
 
@@ -22,9 +22,9 @@
 
 ## Referencias
 
-- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
-- **Diseño / prototipo:** [Wireframe de Rendimiento del equipo](../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/rendimiento-equipo.md)
-- **Documentación técnica:** [Indicador de rendimiento por equipo](../../../specs/technical-docs/portal-procesos-baw.md#md-09) · [Obtener indicadores de rendimiento por equipo](../../../specs/technical-docs/portal-procesos-baw.md#api-11)
+- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
+- **Diseño / prototipo:** [Wireframe de Rendimiento del equipo](../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/rendimiento-equipo.md)
+- **Documentación técnica:** [Indicador de rendimiento por equipo](../../../../architecture/portal-procesos-baw/models/MD-09-indicador-rendimiento-equipo.md) · [Obtener indicadores de rendimiento por equipo](../../../../architecture/portal-procesos-baw/apis/API-018-rendimiento.md#no-existe-indicadores-equipo)
 - **Investigación:** [RS-005: Rendimiento del equipo — panel nativo Team Performance (WLE)](../../research/RS-005-rendimiento-equipo-panel-nativo-wle/README.md) — cambia el marco de la decisión pendiente de AC-001, sin cerrarla. [RS-001 (US-006): spike API-13 en modo administrador](research/RS-001-spike-api-13-modo-administrador/README.md) — descarta esa vía alterna.
 
 ## Observaciones

@@ -8,7 +8,7 @@
 **Repositorios:** frontend
 **INVEST:** 🟢 5 · 🟡 1 / 6
 **DoR:** 🟢 6 / 6
-**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
+**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
 
 ## Descripción
 
@@ -33,9 +33,9 @@
 
 ## Referencias
 
-- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
-- **Diseño / prototipo:** [Wireframe de Detalle de tarea](../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/tarea-detalle.md) (incluye el estado "Reclamar tarea")
-- **Documentación técnica:** [Tarea](../../../specs/technical-docs/portal-procesos-baw.md#md-04) · [Campo de formulario dinámico](../../../specs/technical-docs/portal-procesos-baw.md#md-06) · [Acción de tarea (outcome)](../../../specs/technical-docs/portal-procesos-baw.md#md-07) · [Obtener el detalle de una tarea](../../../specs/technical-docs/portal-procesos-baw.md#api-06) · [Reclamar una tarea](../../../specs/technical-docs/portal-procesos-baw.md#api-07) · [Completar una tarea](../../../specs/technical-docs/portal-procesos-baw.md#api-08) · [Reclamar y completar con formulario dinámico (flujo)](../../../specs/technical-docs/portal-procesos-baw.md#fl-03)
+- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
+- **Diseño / prototipo:** [Wireframe de Detalle de tarea](../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/tarea-detalle.md) (incluye el estado "Reclamar tarea")
+- **Documentación técnica:** [Tarea](../../../../architecture/portal-procesos-baw/models/MD-04-tarea.md) · [Campo de formulario dinámico](../../../../architecture/portal-procesos-baw/models/MD-06-campo-formulario-dinamico.md) · [Acción de tarea (outcome)](../../../../architecture/portal-procesos-baw/models/MD-07-accion-tarea.md) · [Obtener el detalle de una tarea](../../../../architecture/portal-procesos-baw/apis/API-017-tareas.md#get-bpm-user-tasks-task-id) · [Reclamar una tarea](../../../../architecture/portal-procesos-baw/apis/API-017-tareas.md#post-bpm-user-tasks-task-id-claim) · [Completar una tarea](../../../../architecture/portal-procesos-baw/apis/API-017-tareas.md#post-bpm-user-tasks-task-id-complete) · [Reclamar y completar con formulario dinámico (flujo)](../../../../architecture/portal-procesos-baw/flows/FL-03-reclamar-completar-tarea-formulario-dinamico.md)
 
 ## Observaciones
 

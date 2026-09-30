@@ -1,13 +1,13 @@
 # TC-007 — Dado un usuario con tareas en varios estados, Cuando filtra el listado por estado de tarea, Entonces el sistema usa el filtro de servidor de BAW y devuelve solo las tareas de ese estado
 
 **Perspectiva:** Happy Path
-**Tipo de prueba:** Integration, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Alta
 **Criterio de aceptación:** AC-003 (Interacción de usuario) — Filtros de servidor por estado, modelo e instancia, más búsqueda por texto en el cliente
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Integration, E2E · criterion=AC-003 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-003 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

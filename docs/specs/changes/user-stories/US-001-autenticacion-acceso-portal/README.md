@@ -8,7 +8,7 @@
 **Repositorios:** frontend
 **INVEST:** 🟢 5 · 🟡 1 / 6
 **DoR:** 🟢 6 / 6
-**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
+**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
 
 ## Descripción
 
@@ -39,9 +39,9 @@ En desarrollo, las llamadas a BAW pasan por el proxy propio del frontend (`proxy
 
 ## Referencias
 
-- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
-- **Diseño / prototipo:** [Wireframe de Login](../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/login.md)
-- **Documentación técnica:** [Sesión y credenciales](../../../specs/technical-docs/portal-procesos-baw.md#md-01) · [Error de la API](../../../specs/technical-docs/portal-procesos-baw.md#md-11) · [Iniciar sesión](../../../specs/technical-docs/portal-procesos-baw.md#api-01) · [Cerrar sesión](../../../specs/technical-docs/portal-procesos-baw.md#api-02) · [Autenticación y ciclo de vida de la sesión](../../../specs/technical-docs/portal-procesos-baw.md#fl-01) · [Expiración de sesión durante el uso](../../../specs/technical-docs/portal-procesos-baw.md#fl-02)
+- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
+- **Diseño / prototipo:** [Wireframe de Login](../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/login.md)
+- **Documentación técnica:** [Sesión y credenciales](../../../../architecture/portal-procesos-baw/models/MD-01-sesion-credenciales.md) · [Error de la API](../../../../architecture/portal-procesos-baw/models/MD-11-error-api-baw.md) · [Iniciar sesión](../../../../architecture/portal-procesos-baw/apis/API-015-autenticacion.md#post-bpm-system-login) · [Cerrar sesión](../../../../architecture/portal-procesos-baw/apis/API-015-autenticacion.md#no-existe-cerrar-sesion) · [Autenticación y ciclo de vida de la sesión](../../../../architecture/portal-procesos-baw/flows/FL-01-autenticacion-ciclo-vida-sesion.md) · [Expiración de sesión durante el uso](../../../../architecture/portal-procesos-baw/flows/FL-02-expiracion-sesion-durante-uso.md)
 
 ## Observaciones
 

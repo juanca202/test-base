@@ -8,7 +8,7 @@
 **Repositorios:** frontend
 **INVEST:** 🟢 6 / 6
 **DoR:** 🟢 6 / 6
-**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
+**Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
 
 ## Descripción
 
@@ -19,14 +19,17 @@
 ## Criterios de aceptación
 
 - **AC-001 (Interacción de usuario):** El sistema DEBE mostrar un listado de instancias de proceso (`GET /bpm/processes`) con filtro Activo (`running`) / Completado (`finished`).
+  Casos de prueba: [TC-001](./test-cases/TC-001-listado-instancias-activas-running-happy.md) · [TC-002](./test-cases/TC-002-listado-instancias-completadas-finished-happy.md) · [TC-003](./test-cases/TC-003-listado-sin-sesion-401-error.md) · [TC-004](./test-cases/TC-004-estado-sin-instancias-completadas-limite.md) · [TC-005](./test-cases/TC-005-fallo-carga-listado-baw-5xx-error.md)
 - **AC-002 (Interacción de usuario):** El sistema DEBE permitir buscar por texto y filtrar por modelo de proceso, process app y snapshot, usando los parámetros de servidor que soporte la API de BAW (`search_term`, `model`, `containers`, `versions`).
+  Casos de prueba: [TC-006](./test-cases/TC-006-busqueda-texto-search-term-servidor-happy.md) · [TC-007](./test-cases/TC-007-filtro-modelo-proceso-happy.md) · [TC-008](./test-cases/TC-008-filtro-process-app-y-snapshot-happy.md) · [TC-009](./test-cases/TC-009-combinacion-busqueda-filtros-estado-limite.md) · [TC-010](./test-cases/TC-010-busqueda-sin-coincidencias-estado-vacio-error.md)
 - **AC-003 (Eficiencia de rendimiento):** El sistema DEBE cargar el listado de "Procesos" en no más de 3 segundos bajo condiciones normales de red, usando paginación de servidor.
+  Casos de prueba: [TC-011](./test-cases/TC-011-carga-listado-3-segundos-paginacion-happy.md) · [TC-012](./test-cases/TC-012-paginacion-pagina-siguiente-offset-size-happy.md) · [TC-013](./test-cases/TC-013-ultima-pagina-sin-next-limite.md) · [TC-014](./test-cases/TC-014-indicador-carga-respuesta-lenta-limite.md)
 
 ## Referencias
 
-- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../../specs/requirements/SRS-001-portal-procesos-baw/README.md)
-- **Diseño / prototipo:** [Wireframe de Procesos](../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/procesos.md)
-- **Documentación técnica:** [Instancia de proceso](../../../specs/technical-docs/portal-procesos-baw.md#md-03) · [Listar instancias de proceso](../../../specs/technical-docs/portal-procesos-baw.md#api-09)
+- **Requerimiento:** [SRS-001: Portal de administración de procesos IBM BAW](../../requirements/SRS-001-portal-procesos-baw/README.md)
+- **Diseño / prototipo:** [Wireframe de Procesos](../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/procesos.md)
+- **Documentación técnica:** [Instancia de proceso](../../../../architecture/portal-procesos-baw/models/MD-03-instancia-proceso.md) · [Listar instancias de proceso](../../../../architecture/portal-procesos-baw/apis/API-016-procesos.md#get-bpm-processes)
 
 ## Observaciones
 

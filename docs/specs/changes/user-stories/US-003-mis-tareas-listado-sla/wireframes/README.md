@@ -2,7 +2,7 @@
 
 **Historia:** [US-003: Mis tareas — listado y SLA](../README.md)
 **Estado de revisión:** Propuesto
-**Base:** Extiende el [wireframe aprobado](../../../../specs/requirements/SRS-001-portal-procesos-baw/assets/wireframes/mis-tareas.md) del SRS de origen con los estados que introducen los criterios de aceptación de esta historia.
+**Base:** Extiende el [wireframe aprobado](../../../requirements/SRS-001-portal-procesos-baw/assets/wireframes/mis-tareas.md) del SRS de origen con los estados que introducen los criterios de aceptación de esta historia.
 **Propuesta de distribución responsiva:** [prototipo interactivo](https://claude.ai/code/artifact/04f111c6-c5fc-4b0c-b52a-c8acabf6fea9) — tabla en escritorio / tarjetas en móvil, resumen de SLA como filtros rápidos, panel de filtros tipo bottom sheet en móvil. Referencia para actualizar estos SVG cuando se apruebe.
 
 <!-- wireframe:review-status=proposed -->

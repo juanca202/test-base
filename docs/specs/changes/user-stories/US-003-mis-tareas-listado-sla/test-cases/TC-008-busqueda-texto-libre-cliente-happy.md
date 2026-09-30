@@ -1,13 +1,13 @@
 # TC-008 — Dado un listado de tareas ya cargado, Cuando el usuario escribe un término en la búsqueda por texto libre, Entonces el listado se filtra en el cliente sin llamar de nuevo a BAW
 
 **Perspectiva:** Happy Path
-**Tipo de prueba:** Unit, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Media
 **Criterio de aceptación:** AC-003 (Interacción de usuario) — Filtros de servidor por estado, modelo e instancia, más búsqueda por texto en el cliente
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Unit, E2E · criterion=AC-003 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-003 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

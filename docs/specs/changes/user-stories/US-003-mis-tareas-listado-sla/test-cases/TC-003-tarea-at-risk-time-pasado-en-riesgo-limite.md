@@ -1,13 +1,13 @@
 # TC-003 — Dada una tarea con `due_date` futuro pero `at_risk_time` ya pasado, Cuando el sistema deriva su estado de SLA, Entonces la tarea se muestra como «en riesgo»
 
 **Perspectiva:** Límite
-**Tipo de prueba:** Unit, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Media
 **Criterio de aceptación:** AC-001 (Interacción de usuario) — Listado de tareas asignadas con estado de SLA derivado en el cliente
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Unit, E2E · criterion=AC-001 · parent=US-003 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-001 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

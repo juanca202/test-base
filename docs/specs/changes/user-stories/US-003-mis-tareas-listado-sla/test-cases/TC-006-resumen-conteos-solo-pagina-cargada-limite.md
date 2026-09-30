@@ -1,13 +1,13 @@
 # TC-006 — Dado un usuario con más tareas que el tamaño de página, Cuando pagina el listado, Entonces el resumen de SLA sigue reflejando el total real del usuario y no cambia entre páginas
 
 **Perspectiva:** Límite
-**Tipo de prueba:** Unit, Integration
+**Tipo de prueba:** API Test, E2E
 **Prioridad:** Media
 **Criterio de aceptación:** AC-002 (Procesamiento de datos) — Resumen de conteos por estado de SLA calculado por el servidor sobre el total real de tareas del usuario
 **Artefacto padre:** US-003
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Unit, Integration · criterion=AC-002 · parent=US-003 -->
+<!-- tc:status=Ready · testType=API Test, E2E · criterion=AC-002 · parent=US-003 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11
