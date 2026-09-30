@@ -72,6 +72,11 @@ export class PortalLayoutPage extends BasePage {
       .isVisible();
   }
 
+  /** Number of main navigation tab bars currently rendered (detects duplicated navigation). */
+  async countNavigationBars(): Promise<number> {
+    return await this.page.getByRole('tablist').count();
+  }
+
   /** Whether a hamburger control to expand the navigation is shown. */
   async hasHamburgerControl(): Promise<boolean> {
     return await this.page.locator(HAMBURGER_BUTTON).isVisible();
