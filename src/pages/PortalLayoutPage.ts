@@ -5,6 +5,10 @@ const LOGOUT_MENU_ITEM = 'role=menuitem[name="Cerrar sesión"]';
 const HAMBURGER_BUTTON =
   'role=banner >> role=button[name=/menú|menu|hamburgues|navegación/i]';
 
+const SIDEBAR_LOGOUT_BUTTON = '.sidebar__logout';
+const SIDEBAR_COLLAPSE_BUTTON =
+  'role=button[name=/plegar|colapsar|contraer|collapse/i]';
+
 /** Main navigation destinations of the authenticated portal. */
 export const NAVIGATION_DESTINATIONS = [
   'Mis tareas',
@@ -18,6 +22,12 @@ export const NAVIGATION_DESTINATIONS = [
 export class PortalLayoutPage extends BasePage {
   /** Selector of the "Cerrar sesión" entry of the user menu. */
   static readonly LOGOUT_ITEM_SELECTOR = LOGOUT_MENU_ITEM;
+
+  /** Selector of the logout button documented in the footer of a side menu. */
+  static readonly SIDEBAR_LOGOUT_SELECTOR = SIDEBAR_LOGOUT_BUTTON;
+
+  /** Selector of the control that collapses a side menu. */
+  static readonly SIDEBAR_COLLAPSE_SELECTOR = SIDEBAR_COLLAPSE_BUTTON;
 
   /** The shell has no page of its own; open the initial module. */
   async goto(): Promise<void> {
