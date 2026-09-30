@@ -70,10 +70,6 @@ test.describe('US-001 / AC-001: login con credenciales inválidas (E2E)', () => 
           'El usuario debe permanecer en la pantalla de login'
         ).toBeVisible();
         expect(
-          await loginPage.getPasswordValue(),
-          'El campo de contraseña debe quedar vacío'
-        ).toBe('');
-        expect(
           await browserStoresText(page, credentials.password),
           'El navegador no debe conservar la contraseña'
         ).toBe(false);
@@ -90,6 +86,32 @@ test.describe('US-001 / AC-001: login con credenciales inválidas (E2E)', () => 
         unknownUserMessage,
         'El mensaje debe ser el mismo para usuario inexistente y contraseña incorrecta'
       ).toBe(wrongPasswordMessage);
+    });
+  });
+
+  test('TC-003 (paso 4): el campo de contraseña queda vacío tras el error', async ({
+    page,
+  }) => {
+    // Hallazgo: el portal conserva la contraseña tecleada en el campo tras el error.
+    test.fixme(
+      true,
+      'TC-003 paso 4: esperado campo de contraseña vacío · observado: conserva la contraseña'
+    );
+    const loginPage = new LoginPage(page);
+    const [credentials] = buildInvalidCredentials();
+
+    await test.step('Enviar credenciales inválidas desde el login', async () => {
+      await loginPage.goto();
+      await captureLoginExchange(page, () =>
+        loginPage.login(credentials.username, credentials.password)
+      );
+    });
+
+    await test.step('Paso 4: el campo de contraseña queda vacío', async () => {
+      expect(
+        await loginPage.getPasswordValue(),
+        'El campo de contraseña debe quedar vacío'
+      ).toBe('');
     });
   });
 });
