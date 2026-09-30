@@ -2,7 +2,7 @@
 name: Testing Standards
 domain: testing
 status: Active
-last_update: 2026-09-22
+last_update: 2026-09-29
 source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007]
 tags: [testing, msw]
 ---
@@ -135,13 +135,13 @@ Si el sistema bajo prueba no permite borrar un recurso, la prueba no usa ese rec
 **ID:** execution-evidence
 **Estado:** Active
 
-El framework **DEBE** generar automáticamente evidencias y artefactos de ejecución.
+El framework **DEBE** generar automáticamente evidencias y artefactos de **todas** las ejecuciones, no solo de las que fallan.
 
-En las pruebas E2E, los screenshots, los videos y los traces **DEBEN** capturarse principalmente ante fallos. El trace **DEBE** ser la evidencia primaria de diagnóstico.
+En las pruebas E2E, cada ejecución **DEBE** dejar un video del flujo, pase o falle. Ante un fallo, el trace **DEBE** conservarse como evidencia primaria de diagnóstico, apoyado por screenshot.
+
+En las pruebas API, cada prueba **DEBE** adjuntar el request y el response completos a su resultado, pase o falle. La evidencia **DEBE** enmascarar las cabeceras y los tokens sensibles (`Authorization`, `Cookie`, tokens).
 
 Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones.
-
-Las pruebas API **DEBEN** registrar el request y el response de acuerdo con la criticidad del escenario y ante fallos.
 
 ### Excepciones
 
@@ -149,15 +149,16 @@ Ninguna.
 
 ## Criterios de cumplimiento
 
-| ID     | Requisito          | Descripción                                                                                                                                                                | Automatizable | Enfoque    | Verificación                                                |
-| ------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
-| CR-002 | http-api-mocks     | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                                   | no            | —          | Pending                                                     |
-| CR-003 | rest-graphql-api   | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                                                | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-004 | test-data          | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                                                | no            | —          | Pending                                                     |
-| CR-005 | test-data          | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                                       | no            | —          | Pending                                                     |
-| CR-006 | test-data          | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                                  | no            | —          | Pending                                                     |
-| CR-007 | execution-evidence | En las pruebas E2E, los screenshots, los videos y los traces **DEBEN** capturarse principalmente ante fallos, y el trace **DEBE** ser la evidencia primaria de diagnóstico | yes           | bloqueante | Pending                                                     |
-| CR-008 | execution-evidence | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                                              | yes           | bloqueante | Pending                                                     |
+| ID     | Requisito          | Descripción                                                                                                                                               | Automatizable | Enfoque    | Verificación                                                |
+| ------ | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
+| CR-002 | http-api-mocks     | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                  | no            | —          | Pending                                                     |
+| CR-003 | rest-graphql-api   | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                               | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-004 | test-data          | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                               | no            | —          | Pending                                                     |
+| CR-005 | test-data          | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                      | no            | —          | Pending                                                     |
+| CR-006 | test-data          | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                 | no            | —          | Pending                                                     |
+| CR-007 | execution-evidence | Toda ejecución E2E, pase o falle, **DEBE** dejar un video del flujo                                                                                       | yes           | bloqueante | Pending                                                     |
+| CR-008 | execution-evidence | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                             | yes           | bloqueante | Pending                                                     |
+| CR-009 | execution-evidence | Toda prueba API, pase o falle, **DEBE** adjuntar el request y el response completos a su resultado, con las cabeceras y los tokens sensibles enmascarados | yes           | bloqueante | Pending                                                     |
 
 ## Referencias
 
