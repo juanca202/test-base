@@ -59,3 +59,21 @@ export async function wasBusinessDataRendered(page: Page): Promise<boolean> {
     (await page.evaluate('window.__businessDataRendered === true')) === true
   );
 }
+
+/** localStorage key where the portal keeps the settings of the logged-in user. */
+const PORTAL_STORAGE_KEY = 'baw_sess';
+
+/**
+ * Whether the portal's local storage still keeps identity data of the user
+ * (a `username` or a `csrf_token` anywhere in the stored session).
+ * Inspects the current page origin, so call it after navigation.
+ * @param page - Page under test.
+ */
+export async function hasStoredCredentials(page: Page): Promise<boolean> {
+  return (
+    (await page.evaluate(`(() => {
+      const raw = localStorage.getItem('${PORTAL_STORAGE_KEY}') ?? '';
+      return /"(username|csrf_token)"\\s*:\\s*"[^"]+"/.test(raw);
+    })()`)) === true
+  );
+}
