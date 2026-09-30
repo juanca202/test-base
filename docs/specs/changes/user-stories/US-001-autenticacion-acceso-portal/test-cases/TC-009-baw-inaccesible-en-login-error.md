@@ -1,13 +1,13 @@
 # TC-009 — Dado que BAW está inaccesible, Cuando el usuario intenta iniciar sesión, Entonces el sistema muestra un mensaje claro de indisponibilidad con opción de reintentar y no marca la sesión como iniciada
 
 **Perspectiva:** Error
-**Tipo de prueba:** Integration, E2E
+**Tipo de prueba:** E2E
 **Prioridad:** Media
 **Criterio de aceptación:** AC-005 (Fiabilidad) — Mensaje claro y reintento ante error de conexión o autenticación con BAW
 **Artefacto padre:** US-001
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Integration, E2E · criterion=AC-005 · parent=US-001 -->
+<!-- tc:status=Ready · testType=E2E · criterion=AC-005 · parent=US-001 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11

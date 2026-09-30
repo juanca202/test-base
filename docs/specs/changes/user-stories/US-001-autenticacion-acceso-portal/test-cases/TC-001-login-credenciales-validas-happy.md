@@ -1,12 +1,12 @@
 # TC-001 — Dado un usuario con credenciales válidas de BAW, Cuando envía el formulario de login, Entonces accede al módulo inicial del portal
 
 **Perspectiva:** Happy Path
-**Tipo de prueba:** Integration, E2E
+**Tipo de prueba:** API Test, E2E
 **Prioridad:** Alta
 **Criterio de aceptación:** AC-001 (Reglas de negocio) — Autenticación requerida para acceder a cualquier módulo
 **Artefacto padre:** US-001
 
-<!-- tc:status=Ready · testType=Integration, E2E · criterion=AC-001 · parent=US-001 -->
+<!-- tc:status=Ready · testType=API Test, E2E · criterion=AC-001 · parent=US-001 -->
 
 **Estado:** Ready
 **Creado por:** juanca202

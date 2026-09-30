@@ -1,13 +1,13 @@
 # TC-003 — Dado un usuario en la pantalla de login, Cuando envía credenciales inválidas, Entonces el sistema muestra un mensaje de error, lo mantiene en el login y no conserva las credenciales
 
 **Perspectiva:** Error
-**Tipo de prueba:** Integration, E2E
+**Tipo de prueba:** API Test, E2E
 **Prioridad:** Alta
 **Criterio de aceptación:** AC-001 (Reglas de negocio) — Autenticación requerida para acceder a cualquier módulo
 **Artefacto padre:** US-001
 **Estado:** Ready
 
-<!-- tc:status=Ready · testType=Integration, E2E · criterion=AC-001 · parent=US-001 -->
+<!-- tc:status=Ready · testType=API Test, E2E · criterion=AC-001 · parent=US-001 -->
 
 **Creado por:** juanca202
 **Fecha:** 2026-09-11
