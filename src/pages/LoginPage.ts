@@ -13,6 +13,10 @@ export class LoginPage extends BasePage {
   /** Selector of the login screen heading. */
   static readonly HEADING_SELECTOR = HEADING;
 
+  /** Notice shown when the user is sent back to the login after the session expired. */
+  static readonly SESSION_EXPIRED_MESSAGE =
+    'Tu sesión ha expirado. Vuelve a iniciar sesión.';
+
   /** Open the portal root; without a session it redirects to the login. */
   async goto(): Promise<void> {
     await this.page.goto('/');

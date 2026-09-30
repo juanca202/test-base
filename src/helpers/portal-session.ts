@@ -4,7 +4,11 @@ import { BrowserContext, Page } from '@playwright/test';
 export const PORTAL_SESSION_COOKIE = 'baw_sess';
 
 /** Cookies issued by BAW at login; dropping them makes BAW reject the session. */
-const BAW_SESSION_COOKIES = ['LtpaToken2', 'JSESSIONID', 'XSRF-TOKEN'];
+export const BAW_SESSION_COOKIE_NAMES = [
+  'LtpaToken2',
+  'JSESSIONID',
+  'XSRF-TOKEN',
+];
 
 /**
  * Whether the browser context still holds the portal session credentials.
@@ -25,7 +29,7 @@ export async function hasPortalSession(
 export async function dropBawSessionCookies(
   context: BrowserContext
 ): Promise<void> {
-  for (const name of BAW_SESSION_COOKIES) {
+  for (const name of BAW_SESSION_COOKIE_NAMES) {
     await context.clearCookies({ name });
   }
 }
