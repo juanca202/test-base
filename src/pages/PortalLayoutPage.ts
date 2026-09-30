@@ -40,6 +40,14 @@ export class PortalLayoutPage extends BasePage {
     await this.click(`role=tab[name="${name}"]`);
   }
 
+  /**
+   * Switch module without retries, failing after a short timeout. For flows where the
+   * portal may leave the shell on its own (e.g. session expiry) before the click.
+   */
+  async openModuleWithin(name: string, timeout: number): Promise<void> {
+    await this.page.getByRole('tab', { name }).click({ timeout });
+  }
+
   /** Open the user menu of the header. */
   async openUserMenu(): Promise<void> {
     await this.click(USER_MENU_BUTTON);

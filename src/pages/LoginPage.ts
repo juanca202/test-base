@@ -16,6 +16,10 @@ export class LoginPage extends BasePage {
   /** Selector of the login submit button. */
   static readonly SUBMIT_SELECTOR = SUBMIT_BUTTON;
 
+  /** Notice shown when the user is sent back to the login after the session expired. */
+  static readonly SESSION_EXPIRED_MESSAGE =
+    'Tu sesión ha expirado. Vuelve a iniciar sesión.';
+
   /** Open the portal root; without a session it redirects to the login. */
   async goto(): Promise<void> {
     await this.page.goto('/');
