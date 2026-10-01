@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="800" fill="#f0f0f0"/>
+
+  <!-- Card -->
+  <rect x="440" y="220" width="400" height="380" rx="8" fill="#ffffff" stroke="#cccccc" stroke-width="2"/>
+
+  <!-- Logo placeholder -->
+  <rect x="580" y="250" width="120" height="40" rx="4" fill="#d9d9d9"/>
+  <text x="640" y="275" font-size="14" fill="#666666" text-anchor="middle">Logo: Portal de Procesos</text>
+
+  <text x="640" y="320" font-size="20" fill="#333333" text-anchor="middle">Iniciar sesión</text>
+
+  <!-- Campo usuario -->
+  <text x="470" y="360" font-size="12" fill="#666666">Campo: Usuario</text>
+  <rect x="470" y="368" width="340" height="36" rx="4" fill="#f5f5f5" stroke="#bbbbbb"/>
+
+  <!-- Campo contrasena -->
+  <text x="470" y="424" font-size="12" fill="#666666">Campo: Contraseña</text>
+  <rect x="470" y="432" width="340" height="36" rx="4" fill="#f5f5f5" stroke="#bbbbbb"/>
+
+  <!-- Boton -->
+  <rect x="470" y="490" width="340" height="42" rx="4" fill="#999999"/>
+  <text x="640" y="516" font-size="14" fill="#ffffff" text-anchor="middle">Botón: Iniciar sesión</text>
+
+  <!-- Error state hint -->
+  <text x="470" y="555" font-size="11" fill="#999999">Texto: mensaje de error de autenticación (si aplica)</text>
+
+  <text x="640" y="640" font-size="11" fill="#999999" text-anchor="middle">Autenticación contra el endpoint de seguridad de BAW</text>
+</svg>

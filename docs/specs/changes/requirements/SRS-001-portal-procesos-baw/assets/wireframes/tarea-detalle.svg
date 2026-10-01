@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="800" fill="#ffffff"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="1280" height="70" fill="#e6e6e6"/>
+  <text x="30" y="30" font-size="11" fill="#999999">Mis tareas &gt; Detalle de tarea</text>
+  <text x="30" y="52" font-size="20" fill="#333333">Solicitar apertura de cuenta — Apertura de Cuentas:254</text>
+  <rect x="1140" y="18" width="110" height="30" rx="4" fill="#cccccc"/>
+  <text x="1195" y="38" font-size="11" fill="#333333" text-anchor="middle">Botón: Cerrar</text>
+
+  <!-- Task info panel -->
+  <rect x="30" y="90" width="1220" height="60" rx="4" fill="#f5f5f5" stroke="#dddddd"/>
+  <text x="45" y="112" font-size="11" fill="#666666">Equipo: Ejecutivos de cuenta</text>
+  <text x="45" y="130" font-size="11" fill="#666666">Vencimiento: 14 jul 2026 18:25</text>
+  <text x="400" y="112" font-size="11" fill="#666666">Estado SLA: En riesgo</text>
+  <text x="400" y="130" font-size="11" fill="#666666">Asignado a: usuario actual</text>
+
+  <!-- Dynamic form area (fields rendered per proceso) -->
+  <rect x="30" y="165" width="740" height="500" rx="4" fill="#ffffff" stroke="#cccccc"/>
+  <text x="45" y="190" font-size="13" fill="#333333">Formulario dinámico (campos según lo que defina la API de BAW para esta tarea)</text>
+
+  <text x="45" y="220" font-size="11" fill="#666666">Campo: Código</text>
+  <rect x="45" y="228" width="700" height="30" rx="3" fill="#f5f5f5" stroke="#bbbbbb"/>
+
+  <text x="45" y="278" font-size="11" fill="#666666">Campo: Cédula</text>
+  <rect x="45" y="286" width="700" height="30" rx="3" fill="#f5f5f5" stroke="#bbbbbb"/>
+
+  <text x="45" y="336" font-size="11" fill="#666666">Campo: Nombre</text>
+  <rect x="45" y="344" width="700" height="30" rx="3" fill="#f5f5f5" stroke="#bbbbbb"/>
+
+  <text x="45" y="394" font-size="11" fill="#666666">Campo: Calificación del buró</text>
+  <rect x="45" y="402" width="700" height="30" rx="3" fill="#f5f5f5" stroke="#bbbbbb"/>
+
+  <rect x="45" y="450" width="18" height="18" fill="#f5f5f5" stroke="#bbbbbb"/>
+  <text x="70" y="464" font-size="11" fill="#666666">Casilla: Requiere aprobación</text>
+
+  <text x="45" y="500" font-size="10" fill="#999999">Nota: la cantidad, tipo y orden de los campos varía según el proceso — este es solo un ejemplo</text>
+
+  <!-- Comment box -->
+  <text x="45" y="540" font-size="11" fill="#666666">Campo: Comentario (obligatorio al rechazar)</text>
+  <rect x="45" y="548" width="700" height="60" rx="3" fill="#f5f5f5" stroke="#bbbbbb"/>
+
+  <!-- Side panel: history -->
+  <rect x="790" y="165" width="460" height="500" rx="4" fill="#f5f5f5" stroke="#dddddd"/>
+  <text x="805" y="190" font-size="13" fill="#333333">Historial / diagrama de la instancia</text>
+  <text x="805" y="215" font-size="11" fill="#999999">Panel: historial de pasos ya completados (vía API de BAW)</text>
+  <rect x="805" y="235" width="430" height="1" fill="#cccccc"/>
+  <text x="805" y="260" font-size="11" fill="#666666">• CP01-01. Obtener información — Completado</text>
+  <text x="805" y="285" font-size="11" fill="#666666">• CP01-02. Subir y justificar — Completado</text>
+  <text x="805" y="310" font-size="11" fill="#666666">• CP01-03. Revisar, analizar — En curso (tarea actual)</text>
+
+  <!-- Action buttons (dynamic outcomes) -->
+  <rect x="45" y="630" width="150" height="40" rx="4" fill="#999999"/>
+  <text x="120" y="655" font-size="12" fill="#ffffff" text-anchor="middle">Botón: Aprobar</text>
+  <rect x="210" y="630" width="150" height="40" rx="4" fill="#cccccc"/>
+  <text x="285" y="655" font-size="12" fill="#333333" text-anchor="middle">Botón: Rechazar</text>
+  <text x="380" y="655" font-size="10" fill="#999999">(las acciones disponibles dependen de las "outcomes" que exponga la API para esta tarea)</text>
+</svg>
