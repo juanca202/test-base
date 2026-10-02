@@ -26,7 +26,7 @@ Incluir estos archivos en cada conversación para obtener contexto completo sobr
 
 ## Testing y Calidad
 
-- **Allure 3.12.2** - Reportería avanzada con categorización
+- **Allure 3.20.0** - Reportería avanzada con categorización (CLI `allure` + `allure-playwright` 3.13.0, config en `allurerc.mjs`)
 - **ESLint 10.11.0** - Linting con configuración TypeScript
 - **Prettier 3.9.8** - Code formatting
 

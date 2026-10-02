@@ -7,28 +7,51 @@ El framework está construido con Playwright + TypeScript y sigue las mejores pr
 ## Características principales
 
 - 🎭 **Playwright + TypeScript**: Framework moderno para testing E2E y API
-- 📊 **Allure Reports**: Reportería avanzada con categorización de fallos
+- 📊 **Allure Reports**: Reportería avanzada con categorización de fallos, historial y tendencias
 - 🌐 **Multi-browser**: Soporte para Chromium, Firefox, Safari y móviles
 - 🔧 **Configuración flexible**: Variables por ambiente y configuración modular
 - 🎯 **Page Object Model**: Estructura mantenible y reutilizable
-- 🚀 **CI/CD Ready**: Preparado para pipelines de integración continua
+- 🧪 **Mocks HTTP con MSW**: Simulación de APIs con Mock Service Worker
+- 🔎 **Evidencias de ejecución**: Trace de Playwright en E2E y evidencia estructurada en API
+- 🔗 **Trazabilidad con Azure DevOps**: Cada prueba se identifica con su Test Case (`TC-<id>`)
+- 🏛️ **Arquitectura documentada y verificable**: ADRs, estándares y validaciones automáticas (`npm run arch`)
+- 📝 **Plantillas de reportes de calidad**: Formatos DTG para informes de pruebas
+- 🚀 **CI/CD Ready**: Pipeline de Azure Pipelines incluido
+
+## Requisitos previos
+
+- Node.js 20 o superior
+- npm
 
 ## Estructura del proyecto
 
 ```
 ├── src/                    # Código fuente del framework
-│   ├── pages/             # Page Object Models
-│   ├── fixtures/          # Datos de prueba y configuraciones
-│   └── helpers/           # Utilidades y helpers
+│   ├── pages/             # Page Objects (BasePage y páginas derivadas)
+│   ├── fixtures/          # Datos de prueba
+│   └── mocks/             # Handlers y worker de MSW
 ├── tests/                 # Test suites
 │   ├── e2e/              # Pruebas End-to-End
 │   ├── api/              # Pruebas de API
-│   ├── setup/            # Configuración global
+│   ├── setup/            # Global setup y teardown
 │   └── utils/            # Utilidades de testing
-├── docs/                 # Documentación técnica
+├── public/                # Service worker de MSW (mockServiceWorker.js)
+├── scripts/arch/          # Validaciones de arquitectura (fitness functions)
+├── docs/                  # Documentación técnica
 │   ├── adr/              # Architectural Decision Records
-│   └── standards/        # Estándares técnicos
-└── .sdd-devkit/          # Configuración SDD DevKit
+│   ├── standards/        # Estándares técnicos
+│   ├── templates/        # Plantillas de reportes de calidad (DTG018-DTG063)
+│   ├── formats/          # Formatos originales (xlsx/pdf) de los reportes
+│   └── specs/            # Especificaciones de trabajo (SDD DevKit)
+├── playwright.config.ts   # Configuración de Playwright (proyectos, reporters, evidencias)
+├── allurerc.mjs           # Configuración de Allure (historial y reporte)
+├── azure-pipelines.yml    # Pipeline de CI en Azure DevOps
+├── .env.example           # Plantilla de variables de ambiente
+├── AGENTS.md              # Reglas del proyecto y stack para agentes de IA
+├── .agents/               # Memoria persistente del proyecto
+├── .kiro/                 # Steering y skills de Kiro (p. ej. generate-report)
+├── .sdd-devkit/           # Configuración de SDD DevKit
+└── .husky/                # Git hooks (pre-commit con lint-staged)
 ```
 
 ## Primeros pasos
@@ -47,26 +70,90 @@ El framework está construido con Playwright + TypeScript y sigue las mejores pr
    # Editar .env con tus configuraciones
    ```
 
+   Variables principales: `BASE_URL`, `API_BASE_URL`, `TEST_ENV`, `START_LOCAL_SERVER`, credenciales de prueba (`TEST_USER_EMAIL`, `TEST_USER_PASSWORD`), `HEADLESS`, `BROWSER`, `TIMEOUT`. Los datos que dependen del ambiente y las credenciales no se versionan (ver [ADR-006](docs/adr/ADR-006-test-data-strategy.md)).
+
 3. **Ejecutar pruebas de ejemplo**:
 
    ```bash
-   npm test                    # Todas las pruebas
+   npm test                    # Todas las pruebas (genera el reporte Allure)
    npm run test:e2e           # Solo E2E
    npm run test:api           # Solo API
    ```
 
 4. **Ver reportes**:
    ```bash
-   npm run allure:serve       # Servidor local de Allure
+   npm run allure:serve       # Genera el reporte Allure y lo abre en el navegador
    npm run test:report        # Reporte HTML de Playwright
    ```
 
 ## Scripts disponibles
 
-- `npm test` - Ejecutar todas las pruebas
+### Pruebas
+
+- `npm test` - Ejecutar todas las pruebas y generar el reporte Allure (`allure-report/`)
+- `npm run test:e2e` - Solo pruebas E2E (con reporte Allure)
+- `npm run test:api` - Solo pruebas de API (con reporte Allure)
+- `npm run test:browser` - Solo los browsers de escritorio (Chromium, Firefox, WebKit)
+- `npm run test:mobile` - Solo los viewports móviles (Chrome Mobile, Safari Mobile)
 - `npm run test:headed` - Ejecutar con browser visible
 - `npm run test:ui` - Interfaz interactiva de Playwright
 - `npm run test:debug` - Modo debug
-- `npm run lint` - Ejecutar ESLint
-- `npm run format` - Formatear código con Prettier
-- `npm run allure:generate` - Generar reporte Allure
+- `npm run test:report` - Reporte HTML de Playwright
+
+### Reportes
+
+- `npm run allure:generate` - Generar reporte Allure desde `allure-results/`
+- `npm run allure:serve` - Generar el reporte Allure y abrirlo en el navegador
+- `npm run allure:open` - Abrir un reporte Allure ya generado
+
+### Calidad
+
+- `npm run lint` / `npm run lint:fix` - Ejecutar ESLint (con o sin autocorrección)
+- `npm run format` / `npm run format:check` - Formatear o verificar el formato con Prettier
+- `npm run build` - Compilar TypeScript
+- `npm run quality:check` - Lint, verificación de formato y build
+- `npm run arch` - Validaciones de arquitectura contra los estándares de `docs/standards/`
+
+### Mantenimiento
+
+- `npm run install:browsers` - Instalar los browsers de Playwright
+- `npm run install:deps` - Instalar las dependencias del sistema de los browsers
+- `npm run clean` - Eliminar `dist`, `allure-results`, `allure-report` y `test-results`
+
+## Proyectos de Playwright
+
+Definidos en [playwright.config.ts](playwright.config.ts): `chromium`, `firefox`, `webkit`, `Mobile Chrome` (Pixel 5), `Mobile Safari` (iPhone 12) y `api-tests` (pruebas de API con `API_BASE_URL`). Para correr uno solo: `npx playwright test --project=chromium`.
+
+## Convenciones de pruebas
+
+- **Page Object Model**: las páginas son clases `*Page.ts` que extienden `BasePage` ([ADR-002](docs/adr/ADR-002-page-object-model-pattern.md)).
+- **Trazabilidad**: el título de cada prueba empieza con el identificador de su Test Case de Azure DevOps, con un solo `TC-<id>` por prueba (por ejemplo `TC-1234: crear usuario devuelve 201`). ESLint lo valida ([ADR-008](docs/adr/ADR-008-azure-devops-test-case-traceability.md)).
+- **API**: las pruebas usan el `APIRequestContext` de Playwright, tanto para REST como para GraphQL ([ADR-005](docs/adr/ADR-005-playwright-api-request-context.md)).
+- **Mocks**: las APIs HTTP se simulan con MSW desde `src/mocks/` ([ADR-003](docs/adr/ADR-003-msw-http-mocks.md)).
+- **Evidencias**: el trace se captura en todas las ejecuciones E2E (`trace: 'on'`); screenshots y videos solo cuando una prueba los requiere ([ADR-007](docs/adr/ADR-007-execution-evidence.md)).
+
+El detalle completo está en los [estándares](docs/standards/README.md).
+
+## Reportes de ejecución
+
+- **Allure** (`allurerc.mjs`): el reporte se genera con `allure run` al terminar `npm test`. Guarda el historial en `.allure/history.jsonl`, lo que habilita tendencias y detección de tests inestables. Las categorías de fallos están en `playwright.config.ts`.
+- **Playwright HTML**: `npm run test:report`.
+- **JUnit**: `test-results/junit.xml`, en formato legible por máquina para publicarlo en Azure DevOps.
+- **Evidencias**: traces y demás artefactos en `test-results/`.
+
+## Integración continua
+
+[azure-pipelines.yml](azure-pipelines.yml) instala dependencias y browsers, ejecuta `quality:check` y las pruebas, y publica los resultados JUnit, el reporte Allure y las evidencias como artefactos. El historial de Allure se conserva entre ejecuciones con `Cache@2`. Debes definir las variables `BASE_URL` y `API_BASE_URL` en el pipeline.
+
+## Calidad y flujo de trabajo
+
+- **Pre-commit**: Husky ejecuta lint-staged (ESLint y Prettier sobre `*.{ts,js}`, Prettier sobre `*.{json,md}`).
+- **Commits**: se siguen Conventional Commits ([ADR-004](docs/adr/ADR-004-conventional-commits.md)).
+- **Validaciones de arquitectura**: `npm run arch` comprueba que el código cumple los criterios verificables de los estándares ([scripts/arch/](scripts/arch/README.md)).
+
+## Documentación
+
+- [Decisiones de arquitectura (ADR)](docs/adr/README.md)
+- [Estándares técnicos](docs/standards/README.md)
+- [AGENTS.md](AGENTS.md): reglas del proyecto y stack tecnológico
+- [Plantillas de reportes de calidad](docs/templates/): informe final de pruebas (DTG045), matriz de incidencias (DTG018), análisis de pruebas (DTG019), matriz de eventos (DTG020), pantallas de soporte (DTG022) y check list de calidad (DTG063). La skill `generate-report` de Kiro las usa para generar reportes en `docs/reports/`.
