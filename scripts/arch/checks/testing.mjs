@@ -5,7 +5,7 @@
 // UN archivo por ESTÁNDAR. La trazabilidad al criterio va en cada chequeo:
 // CR-XXX en la línea de protocolo y un comentario junto al chequeo.
 // =============================================================================
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -162,6 +162,43 @@ check(
     if (!/\[\s*['"](junit|json)['"]/.test(source)) {
       throw new Error("playwright.config.ts no declara un reporter 'junit' ni 'json'.");
     }
+  }
+);
+
+function specFiles(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) return specFiles(path);
+    return entry.name.endsWith('.spec.ts') ? [path] : [];
+  });
+}
+
+// --- CR-014 (warning) --------------------------------------------------------
+// Las pruebas DEBERÍAN agruparse con acceptanceCriterion() y los títulos de
+// historia y criterio DEBEN tener el formato US-<id>: y AC-<id>:. Revisa de
+// forma estática los specs de tests/e2e y tests/api.
+check(
+  'CR-014',
+  'warning',
+  'specs agrupados con acceptanceCriterion() y títulos US-<id>: / AC-<id>:',
+  () => {
+    const call =
+      /acceptanceCriterion\(\s*(['"`])(.*?)\1\s*,\s*(['"`])(.*?)\3/s;
+    const problems = [];
+    for (const dir of ['tests/e2e', 'tests/api']) {
+      for (const file of specFiles(join(repoRoot, dir))) {
+        const name = file.slice(repoRoot.length + 1);
+        const match = readFileSync(file, 'utf8').match(call);
+        if (!match) {
+          problems.push(`${name}: no usa acceptanceCriterion().`);
+        } else if (!/^US-\d+: /.test(match[2])) {
+          problems.push(`${name}: la historia no empieza con US-<id>: .`);
+        } else if (!/^AC-\d+: /.test(match[4])) {
+          problems.push(`${name}: el criterio no empieza con AC-<id>: .`);
+        }
+      }
+    }
+    if (problems.length > 0) throw new Error(problems.join('\n'));
   }
 );
 

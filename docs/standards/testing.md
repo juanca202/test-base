@@ -3,13 +3,13 @@ name: Testing Standards
 domain: testing
 status: Active
 last_update: 2026-10-02
-source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007, ADR-008]
-tags: [testing, msw, azure-devops]
+source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007, ADR-008, ADR-009]
+tags: [testing, msw, azure-devops, allure]
 ---
 
 # Testing Standards
 
-Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, tiempos, mocks HTTP, APIs REST y GraphQL, evidencias de ejecución y trazabilidad con Test Cases de Azure DevOps.
+Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, tiempos, mocks HTTP, APIs REST y GraphQL, evidencias de ejecución, trazabilidad con Test Cases de Azure DevOps, reportería con Allure y jerarquía Historia, Criterio y Caso de prueba.
 
 ## Estructura de pruebas
 
@@ -166,22 +166,51 @@ Los resultados de ejecución **DEBEN** publicarse como parte del pipeline. La as
 
 Las pruebas que no representan un Test Case de Azure DevOps no declaran identificador.
 
+## Reportería con Allure
+
+**ID:** allure-reporting
+**Estado:** Active
+
+El framework **DEBE** generar un reporte de Allure en cada ejecución de pruebas mediante `allure run`, a partir de los resultados que escribe `allure-playwright`. El reporte **DEBE** conservar el historial de ejecuciones, configurado en `allurerc.mjs`, para habilitar tendencias y detección de pruebas inestables.
+
+El pipeline **DEBERÍA** conservar el historial de Allure entre ejecuciones y **DEBE** publicar el reporte como artefacto.
+
+Allure **NO DEBE** reemplazar el reporte de Playwright como herramienta de análisis de traces: el trace sigue abriéndose con Playwright Trace Viewer.
+
+### Excepciones
+
+Las ejecuciones interactivas (`--ui`, `--headed`, `--debug`) **PUEDEN** ejecutarse sin generar el reporte de Allure.
+
+## Jerarquía Historia, Criterio y Caso de prueba
+
+**ID:** story-criterion-test-hierarchy
+**Estado:** Active
+
+Las pruebas **DEBERÍAN** agruparse con `acceptanceCriterion()` (`src/helpers/traceability.ts`), de modo que cada prueba quede bajo su criterio de aceptación y este bajo su historia de usuario. En Allure, la historia **DEBE** registrarse como `feature` y el criterio como `story`.
+
+Los títulos de historia y de criterio **DEBEN** seguir el formato `US-<id>: título` y `AC-<id>: título`, igual que el `TC-<id>:` de cada prueba. El título de la prueba conserva el identificador de su Test Case según el requisito `azure-devops-traceability`.
+
+### Excepciones
+
+Las pruebas que no responden a un criterio de aceptación documentado no se agrupan.
+
 ## Criterios de cumplimiento
 
-| ID     | Requisito                 | Descripción                                                                                                                                                 | Automatizable | Enfoque    | Verificación                                                |
-| ------ | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
-| CR-002 | http-api-mocks            | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                    | no            | —          | Pending                                                     |
-| CR-003 | rest-graphql-api          | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                                 | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-004 | test-data                 | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                                 | no            | —          | Pending                                                     |
-| CR-005 | test-data                 | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                        | no            | —          | Pending                                                     |
-| CR-006 | test-data                 | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                   | no            | —          | Pending                                                     |
-| CR-007 | execution-evidence        | La configuración base de Playwright **DEBE** capturar el trace en todas las ejecuciones E2E, y los screenshots y videos **NO DEBEN** capturarse por defecto | yes           | bloqueante | Pending                                                     |
-| CR-008 | execution-evidence        | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                               | yes           | bloqueante | Pending                                                     |
-| CR-009 | azure-devops-traceability | El título de toda prueba que represente un Test Case **DEBE** comenzar con `TC-<id>:`, donde `<id>` es numérico                                             | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-010 | azure-devops-traceability | El título de una prueba **NO DEBE** contener más de un identificador `TC-<id>`                                                                              | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-011 | azure-devops-traceability | Los resultados de Playwright **DEBEN** publicarse en un formato legible por máquina en cada ejecución del pipeline                                          | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-012 | azure-devops-traceability | La asociación resultado↔Test Case **DEBE** hacerse mediante las APIs de Azure DevOps y no de forma manual en Test Plans                                     | no            | —          | Pending                                                     |
-| CR-013 | azure-devops-traceability | La asociación resultado↔Test Case **DEBE** poder reconstruirse a partir del código fuente y de los resultados del pipeline                                  | yes           | warning    | Pending                                                     |
+| ID     | Requisito                      | Descripción                                                                                                                                                 | Automatizable | Enfoque    | Verificación                                                |
+| ------ | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
+| CR-002 | http-api-mocks                 | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                    | no            | —          | Pending                                                     |
+| CR-003 | rest-graphql-api               | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                                 | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-004 | test-data                      | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                                 | no            | —          | Pending                                                     |
+| CR-005 | test-data                      | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                        | no            | —          | Pending                                                     |
+| CR-006 | test-data                      | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                   | no            | —          | Pending                                                     |
+| CR-007 | execution-evidence             | La configuración base de Playwright **DEBE** capturar el trace en todas las ejecuciones E2E, y los screenshots y videos **NO DEBEN** capturarse por defecto | yes           | bloqueante | Pending                                                     |
+| CR-008 | execution-evidence             | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                               | yes           | bloqueante | Pending                                                     |
+| CR-009 | azure-devops-traceability      | El título de toda prueba que represente un Test Case **DEBE** comenzar con `TC-<id>:`, donde `<id>` es numérico                                             | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-010 | azure-devops-traceability      | El título de una prueba **NO DEBE** contener más de un identificador `TC-<id>`                                                                              | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-011 | azure-devops-traceability      | Los resultados de Playwright **DEBEN** publicarse en un formato legible por máquina en cada ejecución del pipeline                                          | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-012 | azure-devops-traceability      | La asociación resultado↔Test Case **DEBE** hacerse mediante las APIs de Azure DevOps y no de forma manual en Test Plans                                     | no            | —          | Pending                                                     |
+| CR-013 | azure-devops-traceability      | La asociación resultado↔Test Case **DEBE** poder reconstruirse a partir del código fuente y de los resultados del pipeline                                  | yes           | warning    | Pending                                                     |
+| CR-014 | story-criterion-test-hierarchy | Las pruebas **DEBERÍAN** agruparse con `acceptanceCriterion()` y los títulos de historia y criterio **DEBEN** tener el formato `US-<id>:` y `AC-<id>:`      | yes           | warning    | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
 
 ## Referencias
 
@@ -191,3 +220,4 @@ Las pruebas que no representan un Test Case de Azure DevOps no declaran identifi
 - [ADR-006: Estrategia de datos de prueba](../adr/ADR-006-test-data-strategy.md)
 - [ADR-007: Evidencias y artefactos de ejecución](../adr/ADR-007-execution-evidence.md)
 - [ADR-008: Trazabilidad entre pruebas automatizadas y Test Cases de Azure DevOps](../adr/ADR-008-azure-devops-test-case-traceability.md)
+- [ADR-009: Allure como capa de reportería y jerarquía Historia → Criterio → Caso de prueba](../adr/ADR-009-allure-reporting-and-traceability-hierarchy.md)
