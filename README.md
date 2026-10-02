@@ -128,6 +128,22 @@ Definidos en [playwright.config.ts](playwright.config.ts): `chromium`, `firefox`
 
 - **Page Object Model**: las páginas son clases `*Page.ts` que extienden `BasePage` ([ADR-002](docs/adr/ADR-002-page-object-model-pattern.md)).
 - **Trazabilidad**: el título de cada prueba empieza con el identificador de su Test Case de Azure DevOps, con un solo `TC-<id>` por prueba (por ejemplo `TC-1234: crear usuario devuelve 201`). ESLint lo valida ([ADR-008](docs/adr/ADR-008-azure-devops-test-case-traceability.md)).
+- **Historia → Criterio → Caso de prueba**: las pruebas se agrupan con `acceptanceCriterion()` de `src/helpers/traceability.ts`, que anida `US-XXX` y `AC-XXX` y deja el `TC-<id>` en el título de cada prueba. En Allure, la historia aparece como Feature y el criterio como Story (pestaña Behaviors).
+
+  ```ts
+  acceptanceCriterion(
+    'US-001: Acceso al portal',
+    'AC-001: Autenticación y acceso al portal',
+    () => {
+      test('TC-33801: credenciales inválidas muestran el mismo error', async ({
+        page,
+      }) => {
+        // ...
+      });
+    }
+  );
+  ```
+
 - **API**: las pruebas usan el `APIRequestContext` de Playwright, tanto para REST como para GraphQL ([ADR-005](docs/adr/ADR-005-playwright-api-request-context.md)).
 - **Mocks**: las APIs HTTP se simulan con MSW desde `src/mocks/` ([ADR-003](docs/adr/ADR-003-msw-http-mocks.md)).
 - **Evidencias**: el trace se captura en todas las ejecuciones E2E (`trace: 'on'`); screenshots y videos solo cuando una prueba los requiere ([ADR-007](docs/adr/ADR-007-execution-evidence.md)).
