@@ -30,11 +30,12 @@ El framework está construido con Playwright + TypeScript y sigue las mejores pr
 │   ├── pages/             # Page Objects (BasePage y páginas derivadas)
 │   ├── fixtures/          # Datos de prueba
 │   └── mocks/             # Handlers y worker de MSW
-├── tests/                 # Test suites
-│   ├── e2e/              # Pruebas End-to-End
-│   ├── api/              # Pruebas de API
-│   ├── setup/            # Global setup y teardown
-│   └── utils/            # Utilidades de testing
+├── tests/                 # Test suites, una carpeta por motor de pruebas
+│   └── playwright/        # Pruebas con Playwright
+│       ├── e2e/          # Pruebas End-to-End
+│       ├── api/          # Pruebas de API
+│       ├── setup/        # Global setup y teardown
+│       └── utils/        # Utilidades de testing
 ├── public/                # Service worker de MSW (mockServiceWorker.js)
 ├── scripts/arch/          # Validaciones de arquitectura (fitness functions)
 ├── docs/                  # Documentación técnica
@@ -122,7 +123,7 @@ El framework está construido con Playwright + TypeScript y sigue las mejores pr
 
 ## Proyectos de Playwright
 
-Definidos en [playwright.config.ts](playwright.config.ts): `chromium`, `firefox`, `webkit`, `Mobile Chrome` (Pixel 5), `Mobile Safari` (iPhone 12) y `api-tests` (pruebas de API con `API_BASE_URL`). Para correr uno solo: `npx playwright test --project=chromium`.
+Definidos en [playwright.config.ts](playwright.config.ts): `chromium`, `firefox`, `webkit`, `Mobile Chrome` (Pixel 5), `Mobile Safari` (iPhone 12) y `api-tests` (pruebas de API con `API_BASE_URL`). Para correr uno solo: `npx playwright test --project=chromium`. Las pruebas de otro motor (por ejemplo Maestro) irían en su propia carpeta, `tests/maestro/`.
 
 ## Convenciones de pruebas
 

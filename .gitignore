@@ -30,7 +30,7 @@ traces/
 .env.production.local
 
 # Authentication
-tests/setup/auth.json
+tests/playwright/setup/auth.json
 
 # Logs
 *.log

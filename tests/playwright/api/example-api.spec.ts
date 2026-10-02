@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { ApiHelpers } from '../utils/test-helpers';
-import { acceptanceCriterion } from '../../src/helpers/traceability';
+import { acceptanceCriterion } from '../../../src/helpers/traceability';
 
 acceptanceCriterion(
   'US-002: Gestión de usuarios por API',

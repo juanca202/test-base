@@ -6,7 +6,7 @@ dotenv.config();
 
 export default defineConfig({
   // Test directory
-  testDir: './tests',
+  testDir: './tests/playwright',
 
   // Run tests in files in parallel
   fullyParallel: true,
@@ -54,8 +54,9 @@ export default defineConfig({
   ],
 
   // Global setup and teardown
-  globalSetup: require.resolve('./tests/setup/global-setup.ts'),
-  globalTeardown: require.resolve('./tests/setup/global-teardown.ts'),
+  globalSetup: require.resolve('./tests/playwright/setup/global-setup.ts'),
+  globalTeardown:
+    require.resolve('./tests/playwright/setup/global-teardown.ts'),
 
   // Shared settings for all tests
   use: {
@@ -105,7 +106,7 @@ export default defineConfig({
     // API Testing project
     {
       name: 'api-tests',
-      testDir: './tests/api',
+      testDir: './tests/playwright/api',
       use: {
         baseURL: process.env.API_BASE_URL || 'https://api.example.com',
       },

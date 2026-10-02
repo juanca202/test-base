@@ -22,7 +22,9 @@ async function globalSetup(_config: FullConfig) {
     await page.goto(process.env.BASE_URL || 'http://localhost:3000');
     // Add your authentication logic here
 
-    await page.context().storageState({ path: 'tests/setup/auth.json' });
+    await page
+      .context()
+      .storageState({ path: 'tests/playwright/setup/auth.json' });
     await browser.close();
   }
 

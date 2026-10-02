@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { TestHelpers } from '../utils/test-helpers';
-import { acceptanceCriterion } from '../../src/helpers/traceability';
+import { acceptanceCriterion } from '../../../src/helpers/traceability';
 
 acceptanceCriterion(
   'US-001: Página principal y navegación',

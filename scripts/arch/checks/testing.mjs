@@ -61,12 +61,12 @@ function restrictedNames(rule) {
 
 function coversApiTests(files) {
   const list = Array.isArray(files) ? files : [files];
-  return list.some(pattern => typeof pattern === 'string' && pattern.includes('tests/api'));
+  return list.some(pattern => typeof pattern === 'string' && pattern.includes('tests/playwright/api'));
 }
 
 // --- CR-003 (bloqueante) -----------------------------------------------------
 // Las pruebas REST y GraphQL DEBEN usar APIRequestContext de Playwright.
-// Audita el cableado de ESLint: no-restricted-imports en error sobre tests/api,
+// Audita el cableado de ESLint: no-restricted-imports en error sobre tests/playwright/api,
 // prohibiendo otros clientes HTTP o GraphQL. No ejecuta el linter.
 check(
   'CR-003',
@@ -76,11 +76,11 @@ check(
     const config = require(join(repoRoot, 'eslint.config.js'));
     const block = config.find(entry => coversApiTests(entry.files));
     if (!block) {
-      throw new Error('No hay un bloque de ESLint para tests/api.');
+      throw new Error('No hay un bloque de ESLint para tests/playwright/api.');
     }
     const rule = block.rules?.['no-restricted-imports'];
     if (severity(rule) !== 'error') {
-      throw new Error('no-restricted-imports no está en severidad error para tests/api.');
+      throw new Error('no-restricted-imports no está en severidad error para tests/playwright/api.');
     }
     const names = new Set(restrictedNames(rule));
     const missing = REQUIRED_CLIENTS.filter(name => !names.has(name));
@@ -176,7 +176,7 @@ function specFiles(dir) {
 // --- CR-014 (warning) --------------------------------------------------------
 // Las pruebas DEBERÍAN agruparse con acceptanceCriterion() y los títulos de
 // historia y criterio DEBEN tener el formato US-<id>: y AC-<id>:. Revisa de
-// forma estática los specs de tests/e2e y tests/api.
+// forma estática los specs de tests/playwright/e2e y tests/playwright/api.
 check(
   'CR-014',
   'warning',
@@ -185,7 +185,7 @@ check(
     const call =
       /acceptanceCriterion\(\s*(['"`])(.*?)\1\s*,\s*(['"`])(.*?)\3/s;
     const problems = [];
-    for (const dir of ['tests/e2e', 'tests/api']) {
+    for (const dir of ['tests/playwright/e2e', 'tests/playwright/api']) {
       for (const file of specFiles(join(repoRoot, dir))) {
         const name = file.slice(repoRoot.length + 1);
         const match = readFileSync(file, 'utf8').match(call);

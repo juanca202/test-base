@@ -16,7 +16,7 @@ Este estándar cubre las pruebas automatizadas del framework de QA: estructura, 
 **ID:** test-structure
 **Estado:** Active
 
-Las pruebas E2E **DEBEN** vivir en `tests/e2e/` con el nombre `*.e2e.spec.ts`. Las pruebas API **DEBEN** vivir en `tests/api/` con el nombre `*.api.spec.ts`.
+Las pruebas E2E **DEBEN** vivir en `tests/playwright/e2e/` con el nombre `*.e2e.spec.ts`. Las pruebas API **DEBEN** vivir en `tests/playwright/api/` con el nombre `*.api.spec.ts`.
 
 Cada caso **DEBE** organizarse en `describe` / `it` con los pasos arrange, act y assert.
 

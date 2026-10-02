@@ -48,7 +48,7 @@ module.exports = [
     },
   },
   {
-    files: ['tests/api/**/*.{ts,js}'],
+    files: ['tests/playwright/api/**/*.{ts,js}'],
     rules: {
       'no-restricted-imports': [
         'error',
@@ -85,7 +85,7 @@ module.exports = [
     },
   },
   {
-    files: ['tests/**/*.spec.ts'],
+    files: ['tests/playwright/**/*.spec.ts'],
     plugins: {
       playwright,
     },
