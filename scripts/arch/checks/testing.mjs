@@ -5,6 +5,7 @@
 // UN archivo por ESTÁNDAR. La trazabilidad al criterio va en cada chequeo:
 // CR-XXX en la línea de protocolo y un comentario junto al chequeo.
 // =============================================================================
+import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -85,6 +86,81 @@ check(
     const missing = REQUIRED_CLIENTS.filter(name => !names.has(name));
     if (missing.length > 0) {
       throw new Error(`Faltan clientes restringidos: ${missing.join(', ')}.`);
+    }
+  }
+);
+
+function ruleOptions(rule) {
+  return Array.isArray(rule) ? (rule[1] ?? {}) : {};
+}
+
+function validTitleRule() {
+  const config = require(join(repoRoot, 'eslint.config.js'));
+  const block = config.find(
+    entry =>
+      entry.rules?.['playwright/valid-title'] &&
+      [entry.files].flat().some(pattern => typeof pattern === 'string' && pattern.includes('tests/'))
+  );
+  if (!block) {
+    throw new Error('No hay un bloque de ESLint con playwright/valid-title para tests/.');
+  }
+  const rule = block.rules['playwright/valid-title'];
+  if (severity(rule) !== 'error') {
+    throw new Error('playwright/valid-title no está en severidad error.');
+  }
+  return ruleOptions(rule);
+}
+
+// --- CR-009 (bloqueante) -----------------------------------------------------
+// El título de toda prueba que represente un Test Case DEBE comenzar con
+// TC-<id>:, donde <id> es numérico. Audita el cableado de ESLint
+// (playwright/valid-title.mustMatch); no ejecuta el linter.
+check(
+  'CR-009',
+  'bloqueante',
+  'regla de prefijo TC-<id> obligatorio activa [regla ESLint: playwright/valid-title]',
+  () => {
+    const pattern = validTitleRule().mustMatch?.test;
+    if (typeof pattern !== 'string') {
+      throw new Error('mustMatch.test no está configurado.');
+    }
+    const re = new RegExp(pattern, 'u');
+    if (!re.test('TC-1234: User can login') || re.test('User can login') || re.test('TC-abc: x')) {
+      throw new Error(`mustMatch.test (${pattern}) no exige el prefijo TC-<id>:.`);
+    }
+  }
+);
+
+// --- CR-010 (bloqueante) -----------------------------------------------------
+// El título de una prueba NO DEBE contener más de un identificador TC-<id>.
+// Audita el cableado de ESLint (playwright/valid-title.mustNotMatch).
+check(
+  'CR-010',
+  'bloqueante',
+  'regla de un solo TC-<id> por prueba activa [regla ESLint: playwright/valid-title]',
+  () => {
+    const pattern = validTitleRule().mustNotMatch?.test;
+    if (typeof pattern !== 'string') {
+      throw new Error('mustNotMatch.test no está configurado.');
+    }
+    const re = new RegExp(pattern, 'u');
+    if (!re.test('TC-1: a TC-2') || re.test('TC-1: a')) {
+      throw new Error(`mustNotMatch.test (${pattern}) no prohíbe más de un TC-<id>.`);
+    }
+  }
+);
+
+// --- CR-011 (bloqueante) -----------------------------------------------------
+// Los resultados de Playwright DEBEN publicarse en un formato legible por
+// máquina. Audita playwright.config.ts: reporter junit o json configurado.
+check(
+  'CR-011',
+  'bloqueante',
+  'reporter legible por máquina configurado (junit o json) en playwright.config.ts',
+  () => {
+    const source = readFileSync(join(repoRoot, 'playwright.config.ts'), 'utf8');
+    if (!/\[\s*['"](junit|json)['"]/.test(source)) {
+      throw new Error("playwright.config.ts no declara un reporter 'junit' ni 'json'.");
     }
   }
 );

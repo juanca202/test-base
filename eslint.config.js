@@ -2,6 +2,7 @@ const js = require('@eslint/js');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const tsParser = require('@typescript-eslint/parser');
 const globals = require('globals');
+const playwright = require('eslint-plugin-playwright');
 
 module.exports = [
   js.configs.recommended,
@@ -79,6 +80,21 @@ module.exports = [
                 'Las pruebas REST y GraphQL deben usar APIRequestContext de Playwright.',
             },
           ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['tests/**/*.spec.ts'],
+    plugins: {
+      playwright,
+    },
+    rules: {
+      'playwright/valid-title': [
+        'error',
+        {
+          mustMatch: { test: '^TC-\\d+: .+' },
+          mustNotMatch: { test: 'TC-\\d+[\\s\\S]*TC-\\d+' },
         },
       ],
     },
