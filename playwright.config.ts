@@ -68,11 +68,11 @@ export default defineConfig({
     // Collect trace on every run (ADR-007)
     trace: 'on',
 
-    // Record video on every run (ADR-007)
-    video: 'on',
+    // Video only for scenarios that need it; override per test/project (ADR-007)
+    video: 'off',
 
-    // Take screenshot on every run (ADR-007)
-    screenshot: 'on',
+    // Screenshot only for scenarios that need it; override per test/project (ADR-007)
+    screenshot: 'off',
 
     // Browser context options
     viewport: { width: 1280, height: 720 },

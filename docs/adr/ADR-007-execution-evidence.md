@@ -13,35 +13,115 @@ emits: [testing/CR-007, testing/CR-008]
 
 ## Contexto
 
-Cuando una prueba contra una aplicación externa falla, el equipo necesita diagnosticar sin repetir la ejecución. Una prueba E2E se entiende con la línea de tiempo del navegador; una prueba API, con el intercambio HTTP.
+Las pruebas automatizadas E2E requieren evidencias de ejecución para demostrar el resultado de cada prueba y dar trazabilidad en los reportes de QA.
 
-Además, los reportes de ejecución de las pruebas requieren evidencias de toda la corrida, no solo de los fallos: una evidencia que existe únicamente para las pruebas fallidas no permite documentar las que pasaron.
+La evidencia no se limita a los casos con error. Tanto las pruebas exitosas como las fallidas cuentan con evidencia que permite verificar que la prueba se ejecutó y conocer el estado del sistema durante esa ejecución.
 
-Los reporters de la suite ya producen resultados de cada ejecución. La captura de trace como evidencia principal de un fallo, y el registro de request y response en las pruebas API, todavía no están cerrados como regla del framework.
+Playwright genera distintos tipos de evidencia, principalmente traces, screenshots y videos. Generar todos los tipos para cada prueba incrementa innecesariamente el almacenamiento y el tiempo de procesamiento. Hace falta una estrategia que obtenga evidencia de todas las ejecuciones y seleccione el tipo según la naturaleza de la prueba.
 
 ## Decisión
 
-El framework genera automáticamente evidencias y artefactos de ejecución.
+Se adopta una estrategia de evidencia basada en el tipo de prueba:
 
-- En pruebas E2E se capturan screenshots, videos y traces en todas las ejecuciones, también cuando la prueba pasa. El trace es la evidencia primaria de diagnóstico.
-- Los logs y los resultados de ejecución están disponibles para todas las ejecuciones.
-- Las pruebas API registran request y response de acuerdo con la criticidad del escenario y ante fallos.
+| Tipo de prueba                                 | Evidencia principal     |
+| ---------------------------------------------- | ----------------------- |
+| E2E funcional                                  | Playwright Trace        |
+| Regresión visual                               | Screenshot              |
+| API                                            | Request/Response + logs |
+| Escenarios que requieren evidencia audiovisual | Video                   |
+| Pruebas que requieren diagnóstico adicional    | Evidencia combinada     |
+
+En las pruebas E2E funcionales, el Playwright Trace es la evidencia principal de la ejecución, tanto si la prueba termina correctamente como si termina con error.
+
+La configuración base de Playwright es:
+
+```ts
+use: {
+  trace: 'on',
+  screenshot: 'off',
+  video: 'off',
+}
+```
+
+Las pruebas que requieren otro tipo de evidencia sobrescriben esa configuración a nivel de test, `test.describe` o proyecto.
+
+### Criterios de selección
+
+- Toda ejecución automatizada produce evidencia.
+- La evidencia permite identificar el resultado de la prueba.
+- Se usa el tipo de evidencia que aporta mayor valor al objetivo de la prueba.
+- No se generan varios tipos de evidencia cuando uno es suficiente para documentar la ejecución.
+- La evidencia se asocia con el Test Case, la ejecución y el build correspondientes.
+- La evidencia está disponible para la generación de reportes y para el análisis posterior de resultados.
+- La evidencia se conserva según la política de retención definida para los artefactos del pipeline.
+
+### Uso en los reportes
+
+Las evidencias generadas durante la ejecución forman parte del reporte automatizado de pruebas. El reporte relaciona:
+
+```text
+Test Case
+    │
+    ├── Ejecución
+    │     ├── Resultado
+    │     ├── Duración
+    │     └── Evidencia
+    │
+    ├── Build / Release
+    └── Bug (cuando corresponda)
+```
+
+En las pruebas E2E, el `trace.zip` se vincula desde el reporte como evidencia principal y se analiza con Playwright Trace Viewer.
+
+### Ejemplos
+
+Una prueba funcional genera su trace aunque pase:
+
+```ts
+test('crear usuario', async ({ page }) => {
+  await page.goto('/users');
+  await page.getByRole('button', { name: 'Nuevo' }).click();
+  // ...
+});
+```
+
+```text
+test-results/
+└── crear-usuario/
+    └── trace.zip
+```
+
+En una prueba de regresión visual, la evidencia principal es el screenshot de la comparación:
+
+```ts
+test('pantalla de usuarios', async ({ page }) => {
+  await page.goto('/users');
+
+  await expect(page).toHaveScreenshot('users.png');
+});
+```
 
 ## Consecuencias
 
 ### Positivas
 
-- Un fallo E2E se diagnostica con el trace, apoyado por screenshot y video.
-- Los reportes de ejecución cuentan con evidencias de todas las pruebas de la corrida.
-- Toda ejecución deja logs y resultados, también cuando pasa.
-- El registro HTTP de las pruebas API se concentra en los escenarios críticos y en los fallos.
+- Todas las ejecuciones cuentan con evidencia verificable.
+- Los reportes de QA demuestran tanto ejecuciones exitosas como fallidas.
+- Se mantiene la trazabilidad entre Test Case, ejecución, build y evidencia.
+- Se reduce la generación de artefactos redundantes.
+- El Trace aporta información detallada para analizar una ejecución E2E.
+- La estrategia se adapta al tipo de prueba.
 
 ### Negativas / trade-offs
 
-- Traces y videos de todas las ejecuciones aumentan el costo de almacenamiento y el tiempo de ejecución; requiere una política de retención de artefactos.
+- Se requiere almacenamiento para conservar las evidencias de las ejecuciones exitosas.
+- Los traces pueden generar un volumen considerable de datos en ejecuciones con muchos tests.
+- Hay que definir una política de retención y limpieza de artefactos.
+- Algunos usuarios necesitan Playwright Trace Viewer para analizar los traces.
 - El request y el response de una prueba API pueden incluir datos del escenario; su volumen depende de la criticidad.
 
 ## Referencias
 
 - [ADR-001: Playwright como Framework Principal de Testing](ADR-001-playwright-as-testing-framework.md)
 - [Estándar de Testing](../standards/testing.md) — requisito «Evidencias de ejecución»
+- [Playwright Trace Viewer](https://playwright.dev/docs/trace-viewer)
