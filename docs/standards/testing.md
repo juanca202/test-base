@@ -137,7 +137,7 @@ Si el sistema bajo prueba no permite borrar un recurso, la prueba no usa ese rec
 
 El framework **DEBE** generar automáticamente evidencias y artefactos de ejecución.
 
-Toda ejecución automatizada **DEBE** producir evidencia, tanto si la prueba pasa como si falla. El tipo de evidencia principal se selecciona según el tipo de prueba: Playwright Trace en E2E funcional, screenshot en regresión visual, request/response y logs en API, y video en escenarios que requieren evidencia audiovisual.
+Toda ejecución automatizada **DEBE** producir evidencia, tanto si la prueba pasa como si falla. El tipo de evidencia principal se selecciona según el tipo de prueba: Playwright Trace en E2E funcional, screenshot en regresión visual, evidencia estructurada (request, response y assertions) en API, y video en escenarios que requieren evidencia audiovisual.
 
 En las pruebas E2E funcionales, el trace **DEBE** ser la evidencia principal y la configuración base **DEBE** capturarlo en todas las ejecuciones (`trace: 'on'`). Los screenshots y los videos **NO DEBEN** capturarse por defecto; una prueba que requiera otro tipo de evidencia **PUEDE** sobrescribir la configuración a nivel de test, `test.describe` o proyecto.
 
@@ -145,7 +145,7 @@ La evidencia **DEBE** poder asociarse con el Test Case, la ejecución y el build
 
 Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones.
 
-Las pruebas API **DEBEN** registrar el request y el response de acuerdo con la criticidad del escenario y ante fallos.
+En las pruebas API, la evidencia principal **DEBE** ser una representación estructurada de la ejecución que contenga el request (método, URL, headers relevantes y body), el response (status, headers relevantes y body), las assertions ejecutadas con su resultado, y el resultado y la duración de la prueba. Esta evidencia **DEBE** generarse tanto si la prueba pasa como si falla. El trace de Playwright **PUEDE** usarse como apoyo de diagnóstico, pero **NO DEBE** ser la evidencia principal de una prueba API.
 
 ### Excepciones
 

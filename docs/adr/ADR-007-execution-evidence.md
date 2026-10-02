@@ -23,13 +23,13 @@ Playwright genera distintos tipos de evidencia, principalmente traces, screensho
 
 Se adopta una estrategia de evidencia basada en el tipo de prueba:
 
-| Tipo de prueba                                 | Evidencia principal     |
-| ---------------------------------------------- | ----------------------- |
-| E2E funcional                                  | Playwright Trace        |
-| Regresión visual                               | Screenshot              |
-| API                                            | Request/Response + logs |
-| Escenarios que requieren evidencia audiovisual | Video                   |
-| Pruebas que requieren diagnóstico adicional    | Evidencia combinada     |
+| Tipo de prueba                                 | Evidencia principal                                                     |
+| ---------------------------------------------- | ----------------------------------------------------------------------- |
+| E2E funcional                                  | Playwright Trace                                                        |
+| Regresión visual                               | Screenshot                                                              |
+| API                                            | Evidencia estructurada de la ejecución (request, response y assertions) |
+| Escenarios que requieren evidencia audiovisual | Video                                                                   |
+| Pruebas que requieren diagnóstico adicional    | Evidencia combinada                                                     |
 
 En las pruebas E2E funcionales, el Playwright Trace es la evidencia principal de la ejecución, tanto si la prueba termina correctamente como si termina con error.
 
@@ -45,6 +45,15 @@ use: {
 
 Las pruebas que requieren otro tipo de evidencia sobrescriben esa configuración a nivel de test, `test.describe` o proyecto.
 
+En las pruebas de API la evidencia principal es una representación estructurada de la ejecución, que contiene:
+
+- **Request:** método, URL, headers relevantes y body.
+- **Response:** status, headers relevantes y body.
+- **Assertions:** las assertions ejecutadas y su resultado.
+- **Resultado y duración** de la prueba.
+
+Las pruebas de API pueden usar las capacidades de tracing de Playwright cuando resulte útil para el diagnóstico, pero el Trace no es la evidencia principal del API testing. Esta evidencia estructurada se genera tanto si la prueba termina correctamente como si falla, porque su objetivo es demostrar la ejecución y alimentar los reportes automatizados.
+
 ### Criterios de selección
 
 - Toda ejecución automatizada produce evidencia.
@@ -53,6 +62,7 @@ Las pruebas que requieren otro tipo de evidencia sobrescriben esa configuración
 - No se generan varios tipos de evidencia cuando uno es suficiente para documentar la ejecución.
 - La evidencia se asocia con el Test Case, la ejecución y el build correspondientes.
 - La evidencia está disponible para la generación de reportes y para el análisis posterior de resultados.
+- En las pruebas de API la evidencia estructurada se genera siempre, sin depender del resultado de la prueba.
 - La evidencia se conserva según la política de retención definida para los artefactos del pipeline.
 
 ### Uso en los reportes
@@ -70,6 +80,15 @@ Test Case
     ├── Build / Release
     └── Bug (cuando corresponda)
 ```
+
+El resultado de cada ejecución se asocia con su Test Case de Azure DevOps según [ADR-008](ADR-008-azure-devops-test-case-traceability.md), y el reporte presenta la evidencia según el tipo de prueba:
+
+| Tipo de prueba                           | Evidencia en el reporte         |
+| ---------------------------------------- | ------------------------------- |
+| E2E funcional                            | Playwright Trace                |
+| Regresión visual                         | Screenshot                      |
+| API                                      | Request + Response + Assertions |
+| Escenario cuya estrategia requiere video | Video, únicamente en ese caso   |
 
 En las pruebas E2E, el `trace.zip` se vincula desde el reporte como evidencia principal y se analiza con Playwright Trace Viewer.
 
@@ -101,6 +120,35 @@ test('pantalla de usuarios', async ({ page }) => {
 });
 ```
 
+En una prueba de API, la evidencia principal es la representación estructurada de la ejecución, aunque la prueba pase:
+
+```ts
+test('TC-1234: crear usuario devuelve 201', async ({ request }) => {
+  const response = await request.post('/users', { data: { name: 'Ana' } });
+
+  expect(response.status()).toBe(201);
+});
+```
+
+```json
+{
+  "request": {
+    "method": "POST",
+    "url": "/users",
+    "headers": {},
+    "body": { "name": "Ana" }
+  },
+  "response": {
+    "status": 201,
+    "headers": {},
+    "body": { "id": 10, "name": "Ana" }
+  },
+  "assertions": [{ "name": "status es 201", "result": "passed" }],
+  "result": "passed",
+  "durationMs": 182
+}
+```
+
 ## Consecuencias
 
 ### Positivas
@@ -111,6 +159,7 @@ test('pantalla de usuarios', async ({ page }) => {
 - Se reduce la generación de artefactos redundantes.
 - El Trace aporta información detallada para analizar una ejecución E2E.
 - La estrategia se adapta al tipo de prueba.
+- La evidencia estructurada de las pruebas API (request, response y assertions) se puede leer directamente en el reporte, sin herramientas adicionales.
 
 ### Negativas / trade-offs
 
@@ -118,10 +167,12 @@ test('pantalla de usuarios', async ({ page }) => {
 - Los traces pueden generar un volumen considerable de datos en ejecuciones con muchos tests.
 - Hay que definir una política de retención y limpieza de artefactos.
 - Algunos usuarios necesitan Playwright Trace Viewer para analizar los traces.
-- El request y el response de una prueba API pueden incluir datos del escenario; su volumen depende de la criticidad.
+- El request y el response de una prueba API pueden incluir datos sensibles del escenario; la evidencia estructurada se limita a los headers relevantes.
+- Generar la evidencia estructurada de API en todas las ejecuciones exige un mecanismo común que la produzca y la adjunte al resultado de cada prueba.
 
 ## Referencias
 
 - [ADR-001: Playwright como Framework Principal de Testing](ADR-001-playwright-as-testing-framework.md)
+- [ADR-008: Trazabilidad entre pruebas automatizadas y Test Cases de Azure DevOps](ADR-008-azure-devops-test-case-traceability.md)
 - [Estándar de Testing](../standards/testing.md) — requisito «Evidencias de ejecución»
 - [Playwright Trace Viewer](https://playwright.dev/docs/trace-viewer)
