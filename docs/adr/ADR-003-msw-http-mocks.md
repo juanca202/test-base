@@ -1,7 +1,7 @@
 ---
 id: ADR-003
-status: Draft
-last_update: 2026-09-22
+status: Accepted
+last_update: 2026-10-02
 deciders: [Equipo de QA]
 tags: [msw, testing, http, mocks]
 supersedes: null

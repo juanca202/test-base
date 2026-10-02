@@ -1,6 +1,6 @@
 ---
 id: ADR-007
-status: Draft
+status: Accepted
 last_update: 2026-10-02
 deciders: [Equipo de QA]
 tags: [testing, evidence, trace, allure]
