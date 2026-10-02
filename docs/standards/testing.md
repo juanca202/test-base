@@ -2,14 +2,14 @@
 name: Testing Standards
 domain: testing
 status: Active
-last_update: 2026-09-22
-source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007]
-tags: [testing, msw]
+last_update: 2026-10-01
+source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007, ADR-008]
+tags: [testing, msw, azure-devops]
 ---
 
 # Testing Standards
 
-Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, tiempos, mocks HTTP, APIs REST y GraphQL, y evidencias de ejecución.
+Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, tiempos, mocks HTTP, APIs REST y GraphQL, evidencias de ejecución y trazabilidad con Test Cases de Azure DevOps.
 
 ## Estructura de pruebas
 
@@ -147,17 +147,37 @@ Las pruebas API **DEBEN** registrar el request y el response de acuerdo con la c
 
 Ninguna.
 
+## Trazabilidad con Test Cases de Azure DevOps
+
+**ID:** azure-devops-traceability
+**Estado:** Active
+
+Toda prueba automatizada que represente un Test Case de Azure DevOps **DEBE** declarar su identificador al inicio del título con el formato `TC-<id>:` (por ejemplo `TC-1234: User can login successfully`). El identificador **DEBE** ser estable y corresponder al ID real del Test Case; el texto descriptivo **PUEDE** cambiar sin modificarlo.
+
+Una prueba automatizada **NO DEBE** contener más de un identificador de Test Case. Un Test Case **PUEDE** tener una o varias pruebas automatizadas cuando existan distintos escenarios técnicos para validarlo.
+
+Los resultados de ejecución **DEBEN** publicarse como parte del pipeline. La asociación entre cada resultado y su Test Case **DEBE** hacerse en el pipeline mediante las APIs de Azure DevOps, a partir del identificador declarado, **sin** depender de una asociación manual desde Test Plans, y **DEBE** poder reconstruirse a partir del código fuente y de los resultados del pipeline.
+
+### Excepciones
+
+Las pruebas que no representan un Test Case de Azure DevOps no declaran identificador.
+
 ## Criterios de cumplimiento
 
-| ID     | Requisito          | Descripción                                                                                                                                                                | Automatizable | Enfoque    | Verificación                                                |
-| ------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
-| CR-002 | http-api-mocks     | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                                   | no            | —          | Pending                                                     |
-| CR-003 | rest-graphql-api   | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                                                | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-004 | test-data          | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                                                | no            | —          | Pending                                                     |
-| CR-005 | test-data          | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                                       | no            | —          | Pending                                                     |
-| CR-006 | test-data          | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                                  | no            | —          | Pending                                                     |
-| CR-007 | execution-evidence | En las pruebas E2E, los screenshots, los videos y los traces **DEBEN** capturarse principalmente ante fallos, y el trace **DEBE** ser la evidencia primaria de diagnóstico | yes           | bloqueante | Pending                                                     |
-| CR-008 | execution-evidence | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                                              | yes           | bloqueante | Pending                                                     |
+| ID     | Requisito                 | Descripción                                                                                                                                                                | Automatizable | Enfoque    | Verificación                                                |
+| ------ | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
+| CR-002 | http-api-mocks            | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                                   | no            | —          | Pending                                                     |
+| CR-003 | rest-graphql-api          | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                                                | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-004 | test-data                 | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                                                | no            | —          | Pending                                                     |
+| CR-005 | test-data                 | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                                       | no            | —          | Pending                                                     |
+| CR-006 | test-data                 | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                                  | no            | —          | Pending                                                     |
+| CR-007 | execution-evidence        | En las pruebas E2E, los screenshots, los videos y los traces **DEBEN** capturarse principalmente ante fallos, y el trace **DEBE** ser la evidencia primaria de diagnóstico | yes           | bloqueante | Pending                                                     |
+| CR-008 | execution-evidence        | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                                              | yes           | bloqueante | Pending                                                     |
+| CR-009 | azure-devops-traceability | El título de toda prueba que represente un Test Case **DEBE** comenzar con `TC-<id>:`, donde `<id>` es numérico                                                            | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-010 | azure-devops-traceability | El título de una prueba **NO DEBE** contener más de un identificador `TC-<id>`                                                                                             | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-011 | azure-devops-traceability | Los resultados de Playwright **DEBEN** publicarse en un formato legible por máquina en cada ejecución del pipeline                                                         | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-012 | azure-devops-traceability | La asociación resultado↔Test Case **DEBE** hacerse mediante las APIs de Azure DevOps y no de forma manual en Test Plans                                                    | no            | —          | Pending                                                     |
+| CR-013 | azure-devops-traceability | La asociación resultado↔Test Case **DEBE** poder reconstruirse a partir del código fuente y de los resultados del pipeline                                                 | yes           | warning    | Pending                                                     |
 
 ## Referencias
 
@@ -166,3 +186,4 @@ Ninguna.
 - [ADR-005: APIRequestContext de Playwright para pruebas REST y GraphQL](../adr/ADR-005-playwright-api-request-context.md)
 - [ADR-006: Estrategia de datos de prueba](../adr/ADR-006-test-data-strategy.md)
 - [ADR-007: Evidencias y artefactos de ejecución](../adr/ADR-007-execution-evidence.md)
+- [ADR-008: Trazabilidad entre pruebas automatizadas y Test Cases de Azure DevOps](../adr/ADR-008-azure-devops-test-case-traceability.md)

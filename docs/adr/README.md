@@ -11,6 +11,7 @@ Este directorio contiene las decisiones de arquitectura importantes del proyecto
 - [ADR-005: APIRequestContext de Playwright para pruebas REST y GraphQL](ADR-005-playwright-api-request-context.md)
 - [ADR-006: Estrategia de datos de prueba](ADR-006-test-data-strategy.md)
 - [ADR-007: Evidencias y artefactos de ejecución](ADR-007-execution-evidence.md)
+- [ADR-008: Trazabilidad entre pruebas automatizadas y Test Cases de Azure DevOps](ADR-008-azure-devops-test-case-traceability.md)
 
 ## Formato de ADR
 
