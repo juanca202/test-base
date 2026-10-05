@@ -11,6 +11,9 @@ export default defineConfig({
   // Run tests in files in parallel
   fullyParallel: true,
 
+  // Las pruebas con intervención humana (@human) solo corren con npm run test:human
+  grepInvert: /@human/,
+
   // Fail the build on CI if you accidentally left test.only in the source code
   forbidOnly: !!process.env.CI,
 
