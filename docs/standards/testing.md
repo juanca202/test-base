@@ -2,14 +2,14 @@
 name: Testing Standards
 domain: testing
 status: Active
-last_update: 2026-10-02
-source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007, ADR-008, ADR-009]
-tags: [testing, msw, azure-devops, allure]
+last_update: 2026-10-05
+source_adrs: [ADR-003, ADR-005, ADR-006, ADR-007, ADR-008, ADR-009, ADR-010]
+tags: [testing, msw, azure-devops, allure, human-in-the-loop]
 ---
 
 # Testing Standards
 
-Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, tiempos, mocks HTTP, APIs REST y GraphQL, evidencias de ejecución, trazabilidad con Test Cases de Azure DevOps, reportería con Allure y jerarquía Historia, Criterio y Caso de prueba.
+Este estándar cubre las pruebas automatizadas del framework de QA: estructura, Page Objects, esperas, datos, aserciones, reintentos, tiempos, mocks HTTP, APIs REST y GraphQL, evidencias de ejecución, trazabilidad con Test Cases de Azure DevOps, reportería con Allure, jerarquía Historia, Criterio y Caso de prueba, y tipos de prueba (Fully Automated y Human-in-the-Loop).
 
 ## Estructura de pruebas
 
@@ -194,23 +194,49 @@ Los títulos de historia y de criterio **DEBEN** seguir el formato `US-<id>: tí
 
 Las pruebas que no responden a un criterio de aceptación documentado no se agrupan.
 
+## Tipos de prueba: Fully Automated y Human-in-the-Loop
+
+**ID:** test-types
+**Estado:** Active
+
+Toda prueba y todo Test Case **DEBEN** clasificarse en uno de dos tipos:
+
+| Tipo | Nombre            | Descripción                                                                      |
+| ---- | ----------------- | -------------------------------------------------------------------------------- |
+| 🤖   | Fully Automated   | El caso se ejecuta completamente sin intervención humana.                        |
+| 👤   | Human-in-the-Loop | El flujo es automatizado, pero requiere intervención humana en uno o más puntos. |
+
+Un Test Case Human-in-the-Loop **DEBE** especificar en sus pasos qué input se ingresa manualmente (por ejemplo, un OTP o un CAPTCHA), de modo que la prueba generada considere ese flujo.
+
+La prueba que automatiza un Test Case Human-in-the-Loop **DEBE** solicitar el input con `askHuman()` (`src/helpers/human-intervention.ts`), **DEBE** llevar la etiqueta `@human` (y `@visible` si la persona debe interactuar con la página) y **NO DEBE** leer `stdin` ni `readline` directamente. `askHuman()` **DEBERÍA** admitir una variable de ambiente alternativa para ejecuciones sin persona y **DEBE** fallar en CI si no está definida.
+
+La suite por defecto (`npm test`) **NO DEBE** ejecutar pruebas `@human`. Estas **DEBEN** ejecutarse con la configuración dedicada `playwright.human.config.ts` (`npm run test:human`): solo Chromium y un worker. El browser **DEBE** ser visible únicamente cuando la persona necesita interactuar con la página (por ejemplo, un CAPTCHA), lo cual se declara con la etiqueta `@visible` además de `@human`; cuando el dato llega por otro canal (email, SMS) el browser **DEBERÍA** ejecutarse headless.
+
+### Excepciones
+
+Ninguna.
+
 ## Criterios de cumplimiento
 
-| ID     | Requisito                      | Descripción                                                                                                                                                 | Automatizable | Enfoque    | Verificación                                                |
-| ------ | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
-| CR-002 | http-api-mocks                 | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                    | no            | —          | Pending                                                     |
-| CR-003 | rest-graphql-api               | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                                 | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-004 | test-data                      | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                                 | no            | —          | Pending                                                     |
-| CR-005 | test-data                      | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                        | no            | —          | Pending                                                     |
-| CR-006 | test-data                      | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                   | no            | —          | Pending                                                     |
-| CR-007 | execution-evidence             | La configuración base de Playwright **DEBE** capturar el trace en todas las ejecuciones E2E, y los screenshots y videos **NO DEBEN** capturarse por defecto | yes           | bloqueante | Pending                                                     |
-| CR-008 | execution-evidence             | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                               | yes           | bloqueante | Pending                                                     |
-| CR-009 | azure-devops-traceability      | El título de toda prueba que represente un Test Case **DEBE** comenzar con `TC-<id>:`, donde `<id>` es numérico                                             | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-010 | azure-devops-traceability      | El título de una prueba **NO DEBE** contener más de un identificador `TC-<id>`                                                                              | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-011 | azure-devops-traceability      | Los resultados de Playwright **DEBEN** publicarse en un formato legible por máquina en cada ejecución del pipeline                                          | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
-| CR-012 | azure-devops-traceability      | La asociación resultado↔Test Case **DEBE** hacerse mediante las APIs de Azure DevOps y no de forma manual en Test Plans                                     | no            | —          | Pending                                                     |
-| CR-013 | azure-devops-traceability      | La asociación resultado↔Test Case **DEBE** poder reconstruirse a partir del código fuente y de los resultados del pipeline                                  | yes           | warning    | Pending                                                     |
-| CR-014 | story-criterion-test-hierarchy | Las pruebas **DEBERÍAN** agruparse con `acceptanceCriterion()` y los títulos de historia y criterio **DEBEN** tener el formato `US-<id>:` y `AC-<id>:`      | yes           | warning    | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| ID     | Requisito                      | Descripción                                                                                                                                                               | Automatizable | Enfoque    | Verificación                                                |
+| ------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------- | ----------------------------------------------------------- |
+| CR-002 | http-api-mocks                 | MSW **PUEDE** usarse en el navegador o en desarrollo local para simular APIs sin backend                                                                                  | no            | —          | Pending                                                     |
+| CR-003 | rest-graphql-api               | Las pruebas REST y GraphQL **DEBEN** usar `APIRequestContext` de Playwright                                                                                               | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-004 | test-data                      | Los datos dinámicos y aislados **DEBEN** generarse con factories o builders                                                                                               | no            | —          | Pending                                                     |
+| CR-005 | test-data                      | Cada prueba **DEBE** crear los datos que necesita y **NO DEBE** depender de los que dejó otra prueba                                                                      | no            | —          | Pending                                                     |
+| CR-006 | test-data                      | Los recursos creados durante una prueba **DEBEN** eliminarse al finalizar cuando sea técnicamente posible                                                                 | no            | —          | Pending                                                     |
+| CR-007 | execution-evidence             | La configuración base de Playwright **DEBE** capturar el trace en todas las ejecuciones E2E, y los screenshots y videos **NO DEBEN** capturarse por defecto               | yes           | bloqueante | Pending                                                     |
+| CR-008 | execution-evidence             | Los logs y los resultados de ejecución **DEBEN** estar disponibles para todas las ejecuciones                                                                             | yes           | bloqueante | Pending                                                     |
+| CR-009 | azure-devops-traceability      | El título de toda prueba que represente un Test Case **DEBE** comenzar con `TC-<id>:`, donde `<id>` es numérico                                                           | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-010 | azure-devops-traceability      | El título de una prueba **NO DEBE** contener más de un identificador `TC-<id>`                                                                                            | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-011 | azure-devops-traceability      | Los resultados de Playwright **DEBEN** publicarse en un formato legible por máquina en cada ejecución del pipeline                                                        | yes           | bloqueante | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-012 | azure-devops-traceability      | La asociación resultado↔Test Case **DEBE** hacerse mediante las APIs de Azure DevOps y no de forma manual en Test Plans                                                   | no            | —          | Pending                                                     |
+| CR-013 | azure-devops-traceability      | La asociación resultado↔Test Case **DEBE** poder reconstruirse a partir del código fuente y de los resultados del pipeline                                                | yes           | warning    | Pending                                                     |
+| CR-014 | story-criterion-test-hierarchy | Las pruebas **DEBERÍAN** agruparse con `acceptanceCriterion()` y los títulos de historia y criterio **DEBEN** tener el formato `US-<id>:` y `AC-<id>:`                    | yes           | warning    | [checks/testing.mjs](../../scripts/arch/checks/testing.mjs) |
+| CR-015 | test-types                     | Toda prueba que solicite input manual con `askHuman()` **DEBE** llevar la etiqueta `@human`                                                                               | yes           | bloqueante | Pending                                                     |
+| CR-016 | test-types                     | La suite por defecto **NO DEBE** ejecutar pruebas `@human`, y estas **DEBEN** correr con una configuración dedicada (un worker, browser visible solo con `@visible`)      | yes           | bloqueante | Pending                                                     |
+| CR-017 | test-types                     | El input manual **DEBE** solicitarse con `askHuman()` y **NO DEBE** leerse con `readline` o `stdin` directo en las pruebas                                                | yes           | bloqueante | Pending                                                     |
+| CR-018 | test-types                     | Todo Test Case **DEBE** declarar su tipo (Fully Automated o Human-in-the-Loop) y, si es Human-in-the-Loop, **DEBE** indicar en sus pasos qué input se ingresa manualmente | no            | —          | Pending                                                     |
 
 ## Referencias
 
@@ -221,3 +247,4 @@ Las pruebas que no responden a un criterio de aceptación documentado no se agru
 - [ADR-007: Evidencias y artefactos de ejecución](../adr/ADR-007-execution-evidence.md)
 - [ADR-008: Trazabilidad entre pruebas automatizadas y Test Cases de Azure DevOps](../adr/ADR-008-azure-devops-test-case-traceability.md)
 - [ADR-009: Allure como capa de reportería y jerarquía Historia → Criterio → Caso de prueba](../adr/ADR-009-allure-reporting-and-traceability-hierarchy.md)
+- [ADR-010: Tipos de prueba Fully Automated y Human-in-the-Loop](../adr/ADR-010-human-in-the-loop-tests.md)

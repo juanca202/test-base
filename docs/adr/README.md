@@ -13,6 +13,7 @@ Este directorio contiene las decisiones de arquitectura importantes del proyecto
 - [ADR-007: Evidencias y artefactos de ejecución](ADR-007-execution-evidence.md)
 - [ADR-008: Trazabilidad entre pruebas automatizadas y Test Cases de Azure DevOps](ADR-008-azure-devops-test-case-traceability.md)
 - [ADR-009: Allure como capa de reportería y jerarquía Historia → Criterio → Caso de prueba](ADR-009-allure-reporting-and-traceability-hierarchy.md)
+- [ADR-010: Tipos de prueba Fully Automated y Human-in-the-Loop](ADR-010-human-in-the-loop-tests.md)
 
 ## Formato de ADR
 

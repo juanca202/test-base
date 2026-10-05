@@ -96,6 +96,7 @@ El framework está construido con Playwright + TypeScript y sigue las mejores pr
 - `npm run test:api` - Solo pruebas de API (con reporte Allure)
 - `npm run test:browser` - Solo los browsers de escritorio (Chromium, Firefox, WebKit)
 - `npm run test:mobile` - Solo los viewports móviles (Chrome Mobile, Safari Mobile)
+- `npm run test:human` - Solo pruebas Human-in-the-Loop (`@human`): Chromium y un worker; browser visible solo con `@visible`
 - `npm run test:headed` - Ejecutar con browser visible
 - `npm run test:ui` - Interfaz interactiva de Playwright
 - `npm run test:debug` - Modo debug
@@ -145,6 +146,7 @@ Definidos en [playwright.config.ts](playwright.config.ts): `chromium`, `firefox`
   );
   ```
 
+- **Tipos de prueba**: 🤖 _Fully Automated_ (sin intervención humana) y 👤 _Human-in-the-Loop_ (flujo automatizado que requiere input manual, como un OTP). En los Test Cases Human-in-the-Loop se especifica qué input se ingresa manualmente. Las pruebas que lo automatizan usan `askHuman()` (`src/helpers/human-intervention.ts`), llevan la etiqueta `@human` (y `@visible` si la persona debe interactuar con la página, como en un CAPTCHA), no corren en `npm test` y se ejecutan con `npm run test:human` ([ADR-010](docs/adr/ADR-010-human-in-the-loop-tests.md)).
 - **API**: las pruebas usan el `APIRequestContext` de Playwright, tanto para REST como para GraphQL ([ADR-005](docs/adr/ADR-005-playwright-api-request-context.md)).
 - **Mocks**: las APIs HTTP se simulan con MSW desde `src/mocks/` ([ADR-003](docs/adr/ADR-003-msw-http-mocks.md)).
 - **Evidencias**: el trace se captura en todas las ejecuciones E2E (`trace: 'on'`); screenshots y videos solo cuando una prueba los requiere ([ADR-007](docs/adr/ADR-007-execution-evidence.md)).
